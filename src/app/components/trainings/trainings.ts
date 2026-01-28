@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import  {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../../app.routes';
-import { Training } from '../../model/training.models';
-import { Cart } from '../../services/cart';
+import { Training } from '../../model/training/training.model';
+import { CartService } from '../../services/cart.service';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-trainings',
@@ -15,7 +15,7 @@ import {Router} from '@angular/router';
 })
 export class Trainings implements OnInit {
   listTrainings : Training[] | undefined;
-  constructor(private cart: Cart, private router: Router) { }
+  constructor(private cartService: CartService, private router: Router) { }
 
   ngOnInit() : void {
     this.listTrainings = [
@@ -27,7 +27,7 @@ export class Trainings implements OnInit {
 
 
   onAddToCart(training: Training){
-    this.cart.addTraining(training);
+    this.cartService.addTraining(training);
   }
 
 }
