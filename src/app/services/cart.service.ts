@@ -4,7 +4,7 @@ import {Training} from '../model/training.models';
 @Injectable({
   providedIn: 'root',
 })
-export class Cart {
+export class CartService {
   listTrainings: Training[] = [];
   addTraining (training: Training){
     this.listTrainings.push(training);
