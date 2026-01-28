@@ -1,0 +1,30 @@
+<div>
+
+   @if (listTrainings){
+     <ng-container>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+           @for (training of listTrainings; track training.id){
+             <tr>
+              <td>{{training.id}}</td>
+              <td>{{training.name}}</td>
+              <td>{{training.description}}</td>
+              <td>{{training.price}}</td>
+              <td><input type="number" name="quantity" style="width:60px" [(ngModel)]="training.quantity"> </td>
+              <td> <a class="btn btn-primary" (click)="onAddToCart(training)">Ajouter</a> </td>
+            </tr>
+
+           }
+        </tbody>
+      </table>
+   </ng-container>}
+
+</div>
