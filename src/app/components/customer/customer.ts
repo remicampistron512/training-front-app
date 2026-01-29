@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Customer} from '../../model/customer/customer.model';
+import {Router} from '@angular/router';
+import {CustomerService} from '../../services/customer/customer.service';
 
 @Component({
   selector: 'app-customer',
@@ -19,8 +21,15 @@ export class CustomerComponent {
     email: '',
   };
 
+  constructor(private customerService: CustomerService, private router: Router) { }
+
+
   onSaveCustomer(value: any) {
     console.log('submitted form value:', value);
     console.log('current customer object:', this.customer);
+    this.customerService.addCustomer(this.customer);
+    this.router.navigate(['/customerList']); // navigate AFTER save/log
+
   }
+
 }

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {Customer} from '../../model/customer/customer.model';
 import {RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
+import {CustomerService} from '../../services/customer/customer.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -14,13 +16,13 @@ import {RouterLink} from '@angular/router';
 })
 export class CustomerList {
   listCustomers : Customer[] | undefined;
+  constructor(private customerService: CustomerService) { }
 
   ngOnInit() : void {
-    this.listCustomers = [
-      {id: 1, name: 'Bobby', firstName: 'Bob',address: '50 rue de bob', phone: '1234567890',email: 'customer1@example.com'},
-      {id: 2, name: 'Alice', firstName: 'Alice',address: '50 rue de alice', phone: '9876543210',email: 'customer2@example.com'},
-      {id: 3, name: 'Charlie', firstName: 'Charlie',address: '50 rue de charlie', phone: '5555555555',email: 'customer3@example.com'}
-    ]
+    this.listCustomers = this.customerService.getCustomers();
   }
 
+  protected onAddCustomer(customer: Customer) {
+    this.customerService.addCustomer(customer);
+  }
 }

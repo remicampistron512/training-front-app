@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { CartService } from '../../services/cart.service';   // adjust
+import { CartService } from '../../services/cart/cart.service';   // adjust
 import { Training } from '../../model/training/training.model';      // adjust
 
 @Component({
