@@ -1,0 +1,12 @@
+<form class="d-flex" role="search" (submit)="$event.preventDefault()">
+  <input
+    class="form-control me-2"
+    type="search"
+    placeholder="Search trainings..."
+    aria-label="Search"
+    name="search"
+    [(ngModel)]="term"
+    (ngModelChange)="onInputChange($event)"
+  />
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
