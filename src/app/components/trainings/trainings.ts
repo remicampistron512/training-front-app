@@ -80,18 +80,17 @@ export class Trainings implements OnInit, OnDestroy {
   }
 
 
-  // ✅ single place that applies BOTH filters (text + max price)
   private applyFilters(): void {
-    const q = (this.searchTerm ?? '').trim().toLowerCase();
+    const query = (this.searchTerm ?? '').trim().toLowerCase();
     const max = this.maxPrice;
 
     this.filteredTrainings = this.listTrainings.filter(t => {
       const matchesText =
-        !q ||
-        t.name.toLowerCase().includes(q) ||
-        t.description.toLowerCase().includes(q) ||
-        String(t.id).includes(q) ||
-        String(t.price).includes(q);
+        !query ||
+        t.name.toLowerCase().includes(query) ||
+        t.description.toLowerCase().includes(query) ||
+        String(t.id).includes(query) ||
+        String(t.price).includes(query);
 
       const matchesMax = max === null ? true : t.price <= max;
 
