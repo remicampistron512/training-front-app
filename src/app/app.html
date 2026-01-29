@@ -13,8 +13,9 @@
     </li>
   </ul>
 
-  <!-- ✅ just render it -->
-  <app-search-bar></app-search-bar>
+  @if (showSearchBar) {
+    <app-search-bar></app-search-bar>
+  }>
 </nav>
 
 <router-outlet></router-outlet>
