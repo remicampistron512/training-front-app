@@ -1,59 +1,137 @@
-# TrainingFrontApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
+# 🧾 Application de vente de formations – Frontend Angular
 
-## Development server
+## 📌 Description
 
-To start a local development server, run:
+Ce projet est une application **frontend Angular** dédiée à la consultation et à la gestion de **formations** (trainings), avec fonctionnalités de recherche, panier, gestion des clients et commandes.
+
+L’application est structurée de manière modulaire et suit les bonnes pratiques Angular :
+
+* séparation **composants / services / modèles**
+* routage centralisé
+* services dédiés à la logique métier
+* composants orientés UI
+
+---
+
+## 🚀 Fonctionnalités principales
+
+* 📚 **Liste des formations**
+
+  * Affichage des formations disponibles
+  * Recherche par mot-clé
+* 🔍 **Barre de recherche**
+
+  * Filtrage dynamique des formations
+* 🛒 **Panier**
+
+  * Ajout de formations
+  * Consultation du contenu du panier
+* 👤 **Clients**
+
+  * Création et affichage des clients
+* 📦 **Commandes**
+
+  * Création d’une commande à partir du panier
+* ❌ **Page 404**
+
+  * Gestion des routes inexistantes
+
+---
+
+## 🗂️ Structure du projet
+
+```text
+src/
+│
+├── app/
+│   ├── components/        # Composants visuels
+│   │   ├── cart/           # Panier
+│   │   ├── customer/       # Création / édition client
+│   │   ├── customer-list/  # Liste des clients
+│   │   ├── order/          # Commandes
+│   │   ├── search-bar/     # Recherche de formations
+│   │   ├── trainings/      # Liste des formations
+│   │   └── not-found/      # Page 404
+│   │
+│   ├── model/             # Modèles métier
+│   │   ├── cart/
+│   │   ├── customer/
+│   │   └── training/
+│   │
+│   ├── services/          # Services applicatifs
+│   │   ├── cart/
+│   │   ├── customer/
+│   │   └── search-bar/
+│   │
+│   ├── app.routes.ts      # Définition des routes
+│   ├── app.config.ts      # Configuration de l’application
+│   └── app.ts             # Composant racine
+│
+├── index.html
+├── main.ts                # Point d’entrée Angular
+└── styles.css             # Styles globaux
+```
+
+---
+
+## 🧠 Architecture
+
+* **Composants**
+  Responsables de l’affichage et de l’interaction utilisateur.
+
+* **Services**
+  Centralisent la logique métier (panier, clients, recherche).
+
+* **Modèles**
+  Représentent les entités métier (`Training`, `Customer`, `Cart`, etc.).
+
+* **Routage**
+  Géré via `app.routes.ts`, avec une route fallback vers `NotFoundComponent`.
+
+---
+
+## ⚙️ Prérequis
+
+* Node.js ≥ 18
+* Angular CLI ≥ 17
+
+---
+
+## ▶️ Lancer le projet
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Puis ouvrir :
+👉 `http://localhost:4200`
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🧪 Tests
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Les fichiers `*.spec.ts` sont présents pour les tests unitaires.
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🔧 Améliorations possibles
 
-```bash
-ng e2e
-```
+* Connexion à une API backend
+* Persistance du panier (LocalStorage ou backend)
+* Authentification utilisateur
+* Validation avancée des formulaires
+* Gestion des erreurs et loading states
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 📄 Licence
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Projet à but pédagogique / académique.
+
+
