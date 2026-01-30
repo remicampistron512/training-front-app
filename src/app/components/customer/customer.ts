@@ -25,10 +25,8 @@ export class CustomerComponent {
 
 
   onSaveCustomer(value: any) {
-    console.log('submitted form value:', value);
-    console.log('current customer object:', this.customer);
     this.customerService.addCustomer(this.customer);
-    this.router.navigate(['/customerList']); // navigate AFTER save/log
+    this.router.navigate(['/customerList']);
 
   }
 
