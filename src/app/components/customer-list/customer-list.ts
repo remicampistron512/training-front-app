@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {Customer} from '../../model/customer/customer.model';
 import {RouterLink} from '@angular/router';
-import {Router} from '@angular/router';
 import {CustomerService} from '../../services/customer/customer.service';
 
 @Component({

@@ -24,7 +24,7 @@ export class CustomerComponent {
   constructor(private customerService: CustomerService, private router: Router) { }
 
 
-  onSaveCustomer(value: any) {
+  onSaveCustomer() {
     this.customerService.addCustomer(this.customer);
     this.router.navigate(['/customerList']); // navigate AFTER save/log
 
