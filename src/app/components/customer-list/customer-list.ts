@@ -22,7 +22,5 @@ export class CustomerList {
     this.listCustomers = this.customerService.getCustomers();
   }
 
-  protected onAddCustomer(customer: Customer) {
-    this.customerService.addCustomer(customer);
-  }
+
 }

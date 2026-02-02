@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
-
 import { SearchBar } from './components/search-bar/search-bar';
+
 
 @Component({
   selector: 'app-root',
@@ -26,4 +26,5 @@ export class App {
         this.showSearchBar = this.router.url.startsWith('/trainings');
       });
   }
+
 }

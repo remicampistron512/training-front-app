@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { Training } from '../../model/training/training.model';
 import { CartService } from '../../services/cart/cart.service';
 import { TrainingSearchService } from '../../services/search-bar/training-search.service';
+import {ApiService} from '../../services/api/api-service';
 
 type SortKey = 'id' | 'name' | 'description' | 'price';
 type SortDir = 'asc' | 'desc';
@@ -27,40 +28,51 @@ export class Trainings implements OnInit, OnDestroy {
   sortKey: SortKey = 'id';
   sortDir: SortDir = 'asc';
 
+  error: string | null = null;
   private sub?: Subscription;
 
   constructor(
     private cartService: CartService,
-    private search: TrainingSearchService
-  ) {}
+    private search: TrainingSearchService,
+    private apiService: ApiService,
+    private cdr: ChangeDetectorRef
+  ) {
+
+
+  }
 
   ngOnInit(): void {
-    this.listTrainings = [
-      { id: 1, name: 'Angular (Fundamentals)', description: 'Components, templates, directives, services, routing, forms. Build a complete SPA.', price: 790, quantity: 1 },
-      { id: 2, name: 'TypeScript for JavaScript Developers', description: 'Types, interfaces, generics, union types, type narrowing, async patterns, best practices.', price: 490, quantity: 1 },
-      { id: 3, name: 'Spring Boot (REST API)', description: 'REST, validation, JPA/Hibernate, DTO mapping, error handling, pagination, testing.', price: 990, quantity: 1 },
-      { id: 4, name: 'Docker & Containers (Hands-on)', description: 'Images, Dockerfile, Compose, volumes, networks, debugging, basic CI workflow.', price: 650, quantity: 1 },
-      { id: 5, name: 'SQL & Relational Databases', description: 'Modeling, joins, indexes, transactions, normalization, performance basics (MySQL/MariaDB).', price: 540, quantity: 1 },
-      { id: 6, name: 'Node.js + Express (Backend Essentials)', description: 'REST APIs, middleware, auth basics, validation, error handling, testing and tooling.', price: 720, quantity: 1 },
-      { id: 7, name: 'Git & GitHub Workflow', description: 'Branching strategy, pull requests, code reviews, rebase vs merge, resolving conflicts.', price: 290, quantity: 1 },
-      { id: 8, name: 'Clean Architecture & SOLID (Java)', description: 'Layered architecture, dependency inversion, DTO/DAO patterns, unit testing, refactoring.', price: 850, quantity: 1 },
-      { id: 9, name: 'Web Security Basics (OWASP)', description: 'XSS, CSRF, SQLi, auth/session, password hashing, common mitigations and secure defaults.', price: 680, quantity: 1 },
-      { id: 10, name: 'Agile Project Delivery (Scrum)', description: 'Roles, ceremonies, backlog management, estimation, sprint planning, definition of done.', price: 420, quantity: 1 },
-    ];
 
-    this.filteredTrainings = [...this.listTrainings];
-    this.applySort();
+    // 1) Load data
+    this.getAllTrainings();
 
+    // 2) React to search term changes
     this.sub = this.search.term$.subscribe(term => {
       this.searchTerm = term ?? '';
       this.applyFilters();
     });
+
+
   }
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
-
+  getAllTrainings(): void {
+    this.apiService.getTrainings().subscribe({
+      next: (data) => {
+        this.listTrainings = data ?? [];
+        this.applyFilters();
+        this.cdr.detectChanges(); // ✅ force view update
+      },
+      error: (err) => {
+        this.error = err?.message ?? 'Erreur API';
+        this.listTrainings = [];
+        this.filteredTrainings = [];
+        this.cdr.detectChanges();
+      }
+    });
+  }
   onAddToCart(training: Training): void {
     this.cartService.addTraining(training);
   }
@@ -92,7 +104,7 @@ export class Trainings implements OnInit, OnDestroy {
         String(t.id).includes(query) ||
         String(t.price).includes(query);
 
-      const matchesMax = max === null ? true : t.price <= max;
+      const matchesMax = (max === null || max === 0) ? true : t.price <= max;
 
       return matchesText && matchesMax;
     });
@@ -111,12 +123,26 @@ export class Trainings implements OnInit, OnDestroy {
   }
 
   private applySort(): void {
+    // Convert the sort direction into a numeric multiplier:
+    //  -asc =>  1  (normal order)
+    //  - desc => -1  (reverse order)
     const dir = this.sortDir === 'asc' ? 1 : -1;
+
+    // Current sort key chosen by the user (e.g. "id", "price", "name", "category", etc.)
     const key = this.sortKey;
 
+    // Create a shallow copy before sorting to avoid mutating the existing array reference.
+    // This is often useful for change detection / predictable state updates.
     this.filteredTrainings = [...this.filteredTrainings].sort((a, b) => {
-      if (key === 'id' || key === 'price') return (a[key] - b[key]) * dir;
+      // For numeric fields, compare using subtraction (fast and correct for numbers)
+      if (key === 'id' || key === 'price') {
+        return (a[key] - b[key]) * dir;
+      }
+
+      // For string fields, use localeCompare for human-friendly sorting.
+      // sensitivity: 'base' => case-insensitive (and accent-insensitive in many locales)
       return a[key].localeCompare(b[key], undefined, { sensitivity: 'base' }) * dir;
     });
   }
+
 }

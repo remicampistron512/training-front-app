@@ -1,0 +1,74 @@
+{
+  "trainings": [
+    {
+      "id": 1,
+      "name": "Angular TEST (Fundamentals)",
+      "description": "Components, templates, directives, services, routing, forms. Build a complete SPA.",
+      "price": 790,
+      "quantity": 1
+    },
+    {
+      "id": 2,
+      "name": "TypeScript for JavaScript Developers",
+      "description": "Types, interfaces, generics, union types, type narrowing, async patterns, best practices.",
+      "price": 490,
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "name": "Spring Boot (REST API)",
+      "description": "REST, validation, JPA/Hibernate, DTO mapping, error handling, pagination, testing.",
+      "price": 990,
+      "quantity": 1
+    },
+    {
+      "id": 4,
+      "name": "Docker & Containers (Hands-on)",
+      "description": "Images, Dockerfile, Compose, volumes, networks, debugging, basic CI workflow.",
+      "price": 650,
+      "quantity": 1
+    },
+    {
+      "id": 5,
+      "name": "SQL & Relational Databases",
+      "description": "Modeling, joins, indexes, transactions, normalization, performance basics (MySQL/MariaDB).",
+      "price": 540,
+      "quantity": 1
+    },
+    {
+      "id": 6,
+      "name": "Node.js + Express (Backend Essentials)",
+      "description": "REST APIs, middleware, auth basics, validation, error handling, testing and tooling.",
+      "price": 720,
+      "quantity": 1
+    },
+    {
+      "id": 7,
+      "name": "Git & GitHub Workflow",
+      "description": "Branching strategy, pull requests, code reviews, rebase vs merge, resolving conflicts.",
+      "price": 290,
+      "quantity": 1
+    },
+    {
+      "id": 8,
+      "name": "Clean Architecture & SOLID (Java)",
+      "description": "Layered architecture, dependency inversion, DTO/DAO patterns, unit testing, refactoring.",
+      "price": 850,
+      "quantity": 1
+    },
+    {
+      "id": 9,
+      "name": "Web Security Basics (OWASP)",
+      "description": "XSS, CSRF, SQLi, auth/session, password hashing, common mitigations and secure defaults.",
+      "price": 680,
+      "quantity": 1
+    },
+    {
+      "id": 10,
+      "name": "Agile Project Delivery (Scrum)",
+      "description": "Roles, ceremonies, backlog management, estimation, sprint planning, definition of done.",
+      "price": 420,
+      "quantity": 1
+    }
+  ]
+}
