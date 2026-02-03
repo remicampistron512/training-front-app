@@ -6,7 +6,11 @@ import {CustomerComponent} from './components/customer/customer';
 import {CustomerList} from './components/customer-list/customer-list';
 import {Order} from './components/order/order';
 import {NotFound} from './components/not-found/not-found';
+import {LoginForm} from './components/login-form/login-form';
+import {UserList} from './components/user-list/user-list';
+import {UserForm} from './components/user-form/user-form';
 
+/* Les routes sont pris en compte dans l'ordre (de haut en bas) */
 export const routes: Routes = [
   { path: 'trainings', component: Trainings},
   { path: 'cart',component: Cart},
@@ -15,7 +19,10 @@ export const routes: Routes = [
   { path: 'customer', component: CustomerComponent},
   { path: '', redirectTo: 'trainings', pathMatch: 'full' },
   { path: '404', component: NotFound },
-  {path : '**', redirectTo: "/404"},
+  { path: 'login',component: LoginForm},
+  { path:'userList', component: UserList},
+  { path:'userForm', component: UserForm},
+  { path : '**', redirectTo: "/404"},
 
 ];
 
