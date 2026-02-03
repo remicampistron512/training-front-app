@@ -14,11 +14,26 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/userList">Utilisateurs</a>
     </li>
+    @if(!authService.isLoggedIn()) {
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/login">Se connecter</a>
+    </li>
+    } @else {
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/logout">Se déconnecter</a>
+      </li>
+    }
+
+    @if(authService.isAdmin()) {
+      <li>
+        <a class="nav-link" routerLink="/admin">Administration</a>
+      </li>
+    }
   </ul>
 
   @if (showSearchBar) {
     <app-search-bar></app-search-bar>
-  }>
+  }
 </nav>
 
 <router-outlet></router-outlet>

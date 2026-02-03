@@ -26,5 +26,10 @@
         </tbody>
       </table>
     </ng-container>}
+  @if (userLoggedIn) {
+    <a class="btn btn-primary" routerLink="/completeOrder">Continue</a>
+  } @else {
+    <a class="btn btn-primary" routerLink="/login">Continue</a>
+  }
 
 </div>

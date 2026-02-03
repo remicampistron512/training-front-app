@@ -13,8 +13,6 @@ export class UserService {
     return this.users;
   }
 
-  removeUser(id: number): void {
-    this.users = this.users.filter(c => c.id !== id);
-  }
+
 }
 

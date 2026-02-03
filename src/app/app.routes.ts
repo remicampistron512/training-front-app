@@ -9,10 +9,14 @@ import {NotFound} from './components/not-found/not-found';
 import {LoginForm} from './components/login-form/login-form';
 import {UserList} from './components/user-list/user-list';
 import {UserForm} from './components/user-form/user-form';
+import {Admin} from './components/admin/admin';
+import {adminGuard} from './components/admin-guard'
 
 /* Les routes sont pris en compte dans l'ordre (de haut en bas) */
 export const routes: Routes = [
   { path: 'trainings', component: Trainings},
+  { path: 'admin',component: Admin, canActivate : [adminGuard]
+  },
   { path: 'cart',component: Cart},
   { path: 'order', component: Order},
   { path: 'customerList', component: CustomerList},

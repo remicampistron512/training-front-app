@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {User} from '../../model/user/user.model';
-import {UserService} from '../../services/user/user.service';
 import {RouterLink} from '@angular/router';
+import {ApiService} from '../../services/api/api-service';
 
 @Component({
   selector: 'app-user-list',
@@ -11,9 +11,27 @@ import {RouterLink} from '@angular/router';
 })
 export class UserList {
   listUsers : User[] | undefined;
-  constructor(private userService: UserService) { }
+  error: string | null = null;
+  constructor(private userService: ApiService,private cdr: ChangeDetectorRef) {
+  }
 
   ngOnInit() : void {
-    this.listUsers = this.userService.getUsers();
+    this.getUsers();
+  }
+  getUsers(){
+    this.userService.getUsers().subscribe({
+      next: (data) => {
+        this.listUsers = data ?? [];
+        this.cdr.detectChanges(); // force view update
+      },
+      error: (err) => {
+        this.error = err?.message ?? 'Erreur API';
+        this.listUsers = [];
+        this.cdr.detectChanges();
+      }
+  })
   }
 }
+
+
+

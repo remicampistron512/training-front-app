@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { SearchBar } from './components/search-bar/search-bar';
+import {AuthService} from './services/auth/auth.service';
 
 
 @Component({
@@ -13,10 +14,11 @@ import { SearchBar } from './components/search-bar/search-bar';
 })
 export class App {
   protected readonly title = signal('training-front-app');
-
+  authService ;
   showSearchBar = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, authService:AuthService) {
+    this.authService = authService;
     this.router.events
       .pipe(
         filter(e => e instanceof NavigationEnd)
