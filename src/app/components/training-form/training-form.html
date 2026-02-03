@@ -1,6 +1,6 @@
 <form #trainingForm="ngForm" (ngSubmit)="onSubmit(trainingForm)" novalidate class="container">
   <div class="mb-3">
-    <label for="name" class="form-label">Name</label>
+    <label for="name" class="form-label">Nom</label>
     <input
       id="name"
       name="name"
@@ -16,10 +16,10 @@
     @if (name.invalid && (name.dirty || name.touched)) {
       <div class="invalid-feedback d-block">
         @if (name.errors?.['required']) {
-          <div>Name is required.</div>
+          <div>Le nom est obligatoire.</div>
         }
         @if (name.errors?.['minlength']) {
-          <div>Name must be at least 2 characters.</div>
+          <div>Le nom doit contenir au moins 2 caractères.</div>
         }
       </div>
     }
@@ -42,17 +42,17 @@
     @if (description.invalid && (description.dirty || description.touched)) {
       <div class="invalid-feedback d-block">
         @if (description.errors?.['required']) {
-          <div>Description is required.</div>
+          <div>La description est obligatoire.</div>
         }
         @if (description.errors?.['minlength']) {
-          <div>Description must be at least 10 characters.</div>
+          <div>La description doit contenir au moins 10 caractères.</div>
         }
       </div>
     }
   </div>
 
   <div class="mb-3">
-    <label for="price" class="form-label">Price</label>
+    <label for="price" class="form-label">Prix</label>
     <div class="input-group">
       <span class="input-group-text">€</span>
       <input
@@ -72,17 +72,17 @@
     @if (price.invalid && (price.dirty || price.touched)) {
       <div class="invalid-feedback d-block">
         @if (price.errors?.['required']) {
-          <div>Price is required.</div>
+          <div>Le prix est requis.</div>
         }
         @if (price.errors?.['min']) {
-          <div>Price must be ≥ 0.</div>
+          <div>Le prix doit être supérieur ou égal à 0.</div>
         }
       </div>
     }
   </div>
 
   <div class="mb-3">
-    <label for="quantity" class="form-label">Quantity</label>
+    <label for="quantity" class="form-label">Quantité</label>
     <input
       id="quantity"
       name="quantity"
@@ -99,10 +99,10 @@
     @if (quantity.invalid && (quantity.dirty || quantity.touched)) {
       <div class="invalid-feedback d-block">
         @if (quantity.errors?.['required']) {
-          <div>Quantity is required.</div>
+          <div>La quantité est requise.</div>
         }
         @if (quantity.errors?.['min']) {
-          <div>Quantity must be ≥ 0.</div>
+          <div>La quantité doit être supérieure ou égale à 0.</div>
         }
       </div>
     }
@@ -110,11 +110,11 @@
 
   <div class="d-flex gap-2 mt-4">
     <button type="submit" class="btn btn-primary" [disabled]="trainingForm.invalid">
-      Create training
+      Créer la formation
     </button>
 
     <button type="button" class="btn btn-outline-secondary" (click)="trainingForm.resetForm(defaultModel)">
-      Reset
+      Réinitialiser
     </button>
   </div>
 </form>
