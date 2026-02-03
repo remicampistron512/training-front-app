@@ -32,6 +32,8 @@ export const routes: Routes = [
   { path:'logout', component: Logout},
   { path: 'training-form', component: TrainingFormComponent},
   { path: 'admin-trainings',component: AdminTrainings},
+  { path: 'trainings/new', component: TrainingFormComponent },
+  { path: 'trainings/:id/edit', component: TrainingFormComponent },
   { path : '**', redirectTo: "/404"},
 
 ];

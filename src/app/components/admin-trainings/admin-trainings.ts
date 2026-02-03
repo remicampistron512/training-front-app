@@ -125,25 +125,19 @@ export class AdminTrainings implements OnInit, OnDestroy{
   }
 
   private applySort(): void {
-    // Convert the sort direction into a numeric multiplier:
-    //  -asc =>  1  (normal order)
-    //  - desc => -1  (reverse order)
     const dir = this.sortDir === 'asc' ? 1 : -1;
-
-    // Current sort key chosen by the user (e.g. "id", "price", "name", "category", etc.)
     const key = this.sortKey;
 
-    // Create a shallow copy before sorting to avoid mutating the existing array reference.
-    // This is often useful for change detection / predictable state updates.
     this.filteredTrainings = [...this.filteredTrainings].sort((a, b) => {
-      // For numeric fields, compare using subtraction (fast and correct for numbers)
-      if (key === 'id' || key === 'price') {
-        return (a[key] - b[key]) * dir;
+      // numeric subtraction ONLY for numeric fields
+      if (key === 'price') {
+        return (a.price - b.price) * dir;
       }
 
-      // For string fields, use localeCompare for human-friendly sorting.
-      // sensitivity: 'base' => case-insensitive (and accent-insensitive in many locales)
-      return a[key].localeCompare(b[key], undefined, { sensitivity: 'base' }) * dir;
+      // everything else (including id) as string compare
+      return String((a as any)[key]).localeCompare(String((b as any)[key]), undefined, {
+        sensitivity: 'base',
+      }) * dir;
     });
   }
 }

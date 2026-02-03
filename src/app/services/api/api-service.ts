@@ -13,9 +13,14 @@ export class ApiService {
   public addTraining(training:Training){
     return this.http.post<Training>(environment.host+"/trainings", training);
   }
-  public getTraining(id:number){
-    return this.http.get<Training>(environment.host+"/training/"+id);
+  public getTrainingById(id:string){
+    return this.http.get<Training>(environment.host+"/trainings/"+id);
   }
+
+  public updateTraining(id: string, training: Training) {
+    return this.http.put<Training>(`${environment.host}/trainings/${id}`, training);
+  }
+
   public addUser(user: User){
     return this.http.post<User>(environment.host+"/users", user);
   }

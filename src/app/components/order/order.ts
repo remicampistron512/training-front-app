@@ -30,7 +30,7 @@ export class Order {
 
   // Quantité sécurisée (>=1)
   qty(t: Training): number {
-    const q = Number(t.quantity ?? 1);
+    const q = Number(t.stock ?? 1);
     return Number.isFinite(q) && q > 0 ? q : 1;
   }
 

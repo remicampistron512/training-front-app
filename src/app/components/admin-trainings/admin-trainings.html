@@ -39,8 +39,12 @@
               <td>{{ training.name }}</td>
               <td>{{ training.description }}</td>
               <td>{{ training.price }}</td>
-              <td><button class="btn btn-primary">Modifier</button></td>
-              <td><button class="btn btn-danger">Supprimer</button></td>
+              <td>
+                <button [routerLink]="'/trainings/' + training.id + '/edit'" class="btn btn-primary">
+                  Modifier
+                </button>
+              </td>
+              <td><button routerLink="/training-form" class="btn btn-danger">Supprimer</button></td>
             </tr>
           }
           <tr><button routerLink="/training-form" class="btn btn-primary">Ajouter formation</button></tr>
