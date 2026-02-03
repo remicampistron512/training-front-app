@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {FormsModule, NgForm} from '@angular/forms';
-import { Training } from '../../model/training/training.model'; // adjust path
+import { Training } from '../../model/training/training.model';
+import {CartService} from '../../services/cart/cart.service';
+import {TrainingSearchService} from '../../services/search-bar/training-search.service';
+import {ApiService} from '../../services/api/api-service'; // adjust path
 
 @Component({
   selector: 'app-training-form',
@@ -14,6 +17,14 @@ export class TrainingFormComponent {
   defaultModel: Training = new Training(0, '', '', 0, 0);
 
   model: Training = { ...this.defaultModel };
+
+  constructor(
+    private apiService: ApiService,
+
+  ) {
+
+
+  }
 
   onSubmit(form: NgForm) {
     if (form.invalid) return;
@@ -29,8 +40,8 @@ export class TrainingFormComponent {
 
     console.log('Submitting:', newTraining);
 
-    // TODO: call your service:
-    // this.trainingService.create(newTraining).subscribe(...);
+
+    this.apiService.addTraining(newTraining).subscribe();
 
     form.resetForm(this.defaultModel);
   }

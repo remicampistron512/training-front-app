@@ -10,6 +10,9 @@ export class ApiService {
   public getTrainings(){
     return this.http.get<Training[]>(environment.host+"/trainings");
   }
+  public addTraining(training:Training){
+    return this.http.post<Training>(environment.host+"/trainings", training);
+  }
   public getTraining(id:number){
     return this.http.get<Training>(environment.host+"/training/"+id);
   }
