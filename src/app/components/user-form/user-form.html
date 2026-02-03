@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="col-md-3">
+    <form #f="ngForm" (ngSubmit)="onSaveUser()">
+
+      <div class="form-group">
+        <label class="control-label">Nom :</label>
+        <input
+          type="text"
+          name="name"
+          required
+          class="form-control"
+          [(ngModel)]="user!.name"
+        >
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Prénom :</label>
+        <input
+          type="text"
+          name="firstName"
+          class="form-control"
+          [(ngModel)]="user!.firstName"
+        >
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Adresse :</label>
+        <input
+          type="text"
+          name="address"
+          class="form-control"
+          [(ngModel)]="user!.address"
+        >
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Tel :</label>
+        <input
+          type="text"
+          name="phone"
+          class="form-control"
+          [(ngModel)]="user!.phone"
+        >
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Email :</label>
+        <input
+          type="text"
+          name="email"
+          required
+          class="form-control"
+          [(ngModel)]="user!.email"
+        >
+      </div>
+      <div class="form-group">
+        <label class="control-label">Mot de passe :</label>
+        <input
+          type="text"
+          name="password"
+          required
+          class="form-control"
+          [(ngModel)]="user!.password"
+        >
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="!f.valid"
+        class="btn btn-primary">
+        Next
+      </button>
+
+    </form>
+  </div>
+</div>
