@@ -12,6 +12,7 @@ import {UserForm} from './components/user-form/user-form';
 import {Admin} from './components/admin/admin';
 import {Logout} from './components/logout/logout';
 import {adminGuard} from './components/admin-guard'
+import {TrainingFormComponent} from './components/training-form/training-form';
 import {AdminTrainings} from './components/admin-trainings/admin-trainings';
 
 /* Les routes sont pris en compte dans l'ordre (de haut en bas) */
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path:'userList', component: UserList},
   { path:'userForm', component: UserForm},
   { path:'logout', component: Logout},
+  { path: 'training-form', component: TrainingFormComponent},
   { path: 'admin-trainings',component: AdminTrainings},
   { path : '**', redirectTo: "/404"},
 

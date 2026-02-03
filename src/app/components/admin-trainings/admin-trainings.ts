@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {CartService} from '../../services/cart/cart.service';
 import {TrainingSearchService} from '../../services/search-bar/training-search.service';
+import {RouterLink} from '@angular/router';
 
 type SortKey = 'id' | 'name' | 'description' | 'price';
 type SortDir = 'asc' | 'desc';
@@ -12,7 +13,8 @@ type SortDir = 'asc' | 'desc';
 @Component({
   selector: 'app-admin-trainings',
   imports: [
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './admin-trainings.html',
   styleUrl: './admin-trainings.css',
