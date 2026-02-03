@@ -1,0 +1,147 @@
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ApiService} from '../../services/api/api-service';
+import {Training} from '../../model/training/training.model';
+import {FormsModule} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {CartService} from '../../services/cart/cart.service';
+import {TrainingSearchService} from '../../services/search-bar/training-search.service';
+
+type SortKey = 'id' | 'name' | 'description' | 'price';
+type SortDir = 'asc' | 'desc';
+
+@Component({
+  selector: 'app-admin-trainings',
+  imports: [
+    FormsModule
+  ],
+  templateUrl: './admin-trainings.html',
+  styleUrl: './admin-trainings.css',
+})
+export class AdminTrainings implements OnInit, OnDestroy{
+  listTrainings: Training[] = [];
+  filteredTrainings: Training[] = [];
+
+  searchTerm = '';
+
+  maxPrice: number | null = null; // null = no max filter
+
+  sortKey: SortKey = 'id';
+  sortDir: SortDir = 'asc';
+
+  error: string | null = null;
+  private sub?: Subscription;
+
+  constructor(
+    private cartService: CartService,
+    private search: TrainingSearchService,
+    private apiService: ApiService,
+    private cdr: ChangeDetectorRef
+  ) {
+
+
+  }
+
+  ngOnInit(): void {
+
+    // 1) Load data
+    this.getAllTrainings();
+
+    // 2) React to search term changes
+    this.sub = this.search.term$.subscribe(term => {
+      this.searchTerm = term ?? '';
+      this.applyFilters();
+    });
+
+
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
+  getAllTrainings(): void {
+    this.apiService.getTrainings().subscribe({
+      next: (data) => {
+        this.listTrainings = data ?? [];
+        this.applyFilters();
+        this.cdr.detectChanges(); // ✅ force view update
+      },
+      error: (err) => {
+        this.error = err?.message ?? 'Erreur API';
+        this.listTrainings = [];
+        this.filteredTrainings = [];
+        this.cdr.detectChanges();
+      }
+    });
+  }
+  onAddToCart(training: Training): void {
+    this.cartService.addTraining(training);
+  }
+
+
+
+  setMaxPrice(value: unknown): void {
+    // ngModelChange from <input type="number"> can be number | null | '' (string)
+    if (value === null || value === undefined || value === '') {
+      this.maxPrice = null;
+    } else {
+      const n = typeof value === 'number' ? value : Number(value);
+      this.maxPrice = Number.isFinite(n) ? n : null;
+    }
+
+    this.applyFilters();
+  }
+
+
+  private applyFilters(): void {
+    const query = (this.searchTerm ?? '').trim().toLowerCase();
+    const max = this.maxPrice;
+
+    this.filteredTrainings = this.listTrainings.filter(t => {
+      const matchesText =
+        !query ||
+        t.name.toLowerCase().includes(query) ||
+        t.description.toLowerCase().includes(query) ||
+        String(t.id).includes(query) ||
+        String(t.price).includes(query);
+
+      const matchesMax = (max === null || max === 0) ? true : t.price <= max;
+
+      return matchesText && matchesMax;
+    });
+
+    this.applySort();
+  }
+
+  setSort(key: SortKey): void {
+    if (this.sortKey === key) {
+      this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortKey = key;
+      this.sortDir = 'asc';
+    }
+    this.applySort();
+  }
+
+  private applySort(): void {
+    // Convert the sort direction into a numeric multiplier:
+    //  -asc =>  1  (normal order)
+    //  - desc => -1  (reverse order)
+    const dir = this.sortDir === 'asc' ? 1 : -1;
+
+    // Current sort key chosen by the user (e.g. "id", "price", "name", "category", etc.)
+    const key = this.sortKey;
+
+    // Create a shallow copy before sorting to avoid mutating the existing array reference.
+    // This is often useful for change detection / predictable state updates.
+    this.filteredTrainings = [...this.filteredTrainings].sort((a, b) => {
+      // For numeric fields, compare using subtraction (fast and correct for numbers)
+      if (key === 'id' || key === 'price') {
+        return (a[key] - b[key]) * dir;
+      }
+
+      // For string fields, use localeCompare for human-friendly sorting.
+      // sensitivity: 'base' => case-insensitive (and accent-insensitive in many locales)
+      return a[key].localeCompare(b[key], undefined, { sensitivity: 'base' }) * dir;
+    });
+  }
+}

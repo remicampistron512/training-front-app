@@ -25,7 +25,9 @@ export class App {
       )
       .subscribe(() => {
         // show ONLY on /trainings (also covers /trainings?x=... etc)
-        this.showSearchBar = this.router.url.startsWith('/trainings');
+        this.showSearchBar =
+          this.router.url.startsWith('/trainings') ||
+          this.router.url.startsWith('/admin-trainings');
       });
   }
 
