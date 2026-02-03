@@ -12,5 +12,11 @@ export class AuthService {
     if (!userJson) return false;
 
     const user = JSON.parse(userJson);
-    return user.role === 'admin';  }
+    console.log(localStorage.getItem('user'));
+    return user[0].role === 'admin';
+
+  }
+  logout():void {
+    localStorage.removeItem('user');
+  }
 }

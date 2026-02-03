@@ -1,4 +1,65 @@
 {
+  "users": [
+    {
+      "id": "1770112464429",
+      "name": "qsdqs",
+      "firstName": "qsdqsd",
+      "address": "qsqsd",
+      "phone": "qsdqsd",
+      "email": "qsqsd",
+      "password": "qsd"
+    },
+    {
+      "id": "1770123886905",
+      "name": "Rémi",
+      "firstName": "Campistron",
+      "address": "78,rue du treuild",
+      "phone": "05580",
+      "email": "email",
+      "password": "1234",
+      "role": ""
+    },
+    {
+      "id": "1770124090886",
+      "name": "bob",
+      "firstName": "bobb",
+      "address": "ikii",
+      "phone": "iii",
+      "email": "iii",
+      "password": "ii",
+      "role": ""
+    },
+    {
+      "id": "1770124221756",
+      "name": "hjhj",
+      "firstName": "hgghj",
+      "address": "ghjghj",
+      "phone": "ghjhgj",
+      "email": "hgjgh",
+      "password": "hgjghj",
+      "role": ""
+    },
+    {
+      "id": "1770124298348",
+      "name": "qsdqsd",
+      "firstName": "qsdqsd",
+      "address": "qsdqsd",
+      "phone": "qsdqsd",
+      "email": "qsqsds",
+      "password": "qsdqs",
+      "role": "user"
+    },
+    {
+      "id": "1770130182828",
+      "name": "bob",
+      "firstName": "bobby",
+      "address": "1234",
+      "phone": "1235",
+      "email": "bob",
+      "password": "bob",
+      "role": "admin"
+    }
+  ],
   "trainings": [
     {
       "id": 1,

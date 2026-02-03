@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CartService } from '../../services/cart/cart.service';   // adjust
 import { Training } from '../../model/training/training.model';
-import {RouterLink} from '@angular/router';      // adjust
+import {RouterLink} from '@angular/router';
+import {AuthService} from '../../services/auth/auth.service';      // adjust
 
 @Component({
   selector: 'app-cart',
@@ -14,9 +15,12 @@ import {RouterLink} from '@angular/router';      // adjust
   styleUrl: './cart.css',
 })
 export class Cart {
-  isLoggedIn = false;
-  protected userLoggedIn: any;
-  constructor(public cartService: CartService) {}
+  constructor(public cartService: CartService,public authService:AuthService) {}
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
 
   get trainings(): Training[] {
     return this.cartService.getTrainings();

@@ -10,6 +10,7 @@ import {LoginForm} from './components/login-form/login-form';
 import {UserList} from './components/user-list/user-list';
 import {UserForm} from './components/user-form/user-form';
 import {Admin} from './components/admin/admin';
+import {Logout} from './components/logout/logout';
 import {adminGuard} from './components/admin-guard'
 
 /* Les routes sont pris en compte dans l'ordre (de haut en bas) */
@@ -26,6 +27,7 @@ export const routes: Routes = [
   { path: 'login',component: LoginForm},
   { path:'userList', component: UserList},
   { path:'userForm', component: UserForm},
+  { path:'logout', component: Logout},
   { path : '**', redirectTo: "/404"},
 
 ];

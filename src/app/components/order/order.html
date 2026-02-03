@@ -1,1 +1,59 @@
-<p>order works!</p>
+<div class="container mt-3">
+  <h2>Récapitulatif de commande</h2>
+
+  @if (trainings.length === 0) {
+    <p>Aucune formation dans le panier.</p>
+    <a class="btn btn-secondary" routerLink="/trainings">Retour aux formations</a>
+  }
+
+  @if (trainings.length > 0) {
+    <table class="table table-striped table-hover mt-3">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th class="text-end">PU</th>
+        <th class="text-end">Qté</th>
+        <th class="text-end">Total ligne</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        @for (t of trainings; track t.id) {
+          <tr>
+            <td>{{ t.id }}</td>
+            <td>{{ t.name }}</td>
+            <td>{{ t.description }}</td>
+            <td class="text-end">{{ t.price }} €</td>
+            <td class="text-end">{{ qty(t) }}</td>
+            <td class="text-end">{{ lineTotal(t) }} €</td>
+          </tr>
+        }
+      </tbody>
+
+      <tfoot>
+      <tr>
+        <th colspan="5" class="text-end">Total commande</th>
+        <th class="text-end">{{ total }} €</th>
+      </tr>
+      </tfoot>
+    </table>
+
+    <div class="d-flex gap-2 mt-3">
+      <button class="btn btn-outline-secondary" (click)="goBackToCart()">
+        Modifier le panier
+      </button>
+
+      @if (isLoggedIn) {
+        <button class="btn btn-success" (click)="confirmOrder()">
+          Confirmer la commande
+        </button>
+      } @else {
+        <a class="btn btn-primary" [routerLink]="['/login']" [queryParams]="{ returnUrl: '/order' }">
+          Se connecter pour confirmer
+        </a>
+      }
+    </div>
+  }
+</div>

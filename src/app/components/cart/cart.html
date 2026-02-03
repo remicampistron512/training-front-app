@@ -26,10 +26,10 @@
         </tbody>
       </table>
     </ng-container>}
-  @if (userLoggedIn) {
-    <a class="btn btn-primary" routerLink="/completeOrder">Continue</a>
+  @if (isLoggedIn) {
+    <a class="btn btn-primary" routerLink="/order">Passer la commande</a>
   } @else {
-    <a class="btn btn-primary" routerLink="/login">Continue</a>
+    <a class="btn btn-primary" routerLink="/login">S'identifier et  passer commande </a>
   }
 
 </div>

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ApiService} from '../../services/api/api-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -14,7 +15,7 @@ export class LoginForm {
   enteredPassword= '';
   user: any;
   error: string | null = null;
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,private router: Router) {
   }
 
   getUserByEmail():any {
@@ -28,6 +29,7 @@ export class LoginForm {
         if (this.user.password === this.enteredPassword) {
           console.log('auth ok');
           localStorage.setItem('user', JSON.stringify(user));
+          this.router.navigateByUrl('/trainings'); // or '/'
         } else {
           console.log('auth not ok (bad password)');
         }
