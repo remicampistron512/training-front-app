@@ -159,4 +159,18 @@ export class AdminTrainings implements OnInit, OnDestroy{
       }) * dir;
     });
   }
+
+  protected removeTraining(id?:string) {
+    if (!id) {
+      this.flash = { type: 'danger', text: "Impossible de supprimer : id manquant." };
+      return;
+    }
+    this.apiService.removeTraining(id).subscribe({
+      next: () => {
+        this.listTrainings = this.listTrainings.filter(t => t.id !== id);
+        this.applyFilters();
+      },
+      error: () => this.flash = { type: 'danger', text: 'Suppression échouée.' }
+    });
+  }
 }

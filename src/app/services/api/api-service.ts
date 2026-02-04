@@ -17,10 +17,14 @@ export class ApiService {
     return this.http.get<Training>(environment.host+"/trainings/"+id);
   }
 
+
+
   public updateTraining(id: string, training: Training) {
     return this.http.put<Training>(`${environment.host}/trainings/${id}`, training);
   }
-
+  public removeTraining(id:string){
+    return this.http.delete<Training>(`${environment.host}/trainings/${id}`);
+  }
   public addUser(user: User){
     return this.http.post<User>(environment.host+"/users", user);
   }

@@ -51,7 +51,7 @@
                   Modifier
                 </button>
               </td>
-              <td><button routerLink="/training-form" class="btn btn-danger">Supprimer</button></td>
+              <td><button (click)="removeTraining(training.id)"  class="btn btn-danger">Supprimer</button></td>
             </tr>
           }
 
