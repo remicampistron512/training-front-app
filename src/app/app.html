@@ -1,39 +1,82 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Trainings</a>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/trainings">Trainings</a>
 
-  <ul class="navbar-nav">
-    <li class="nav-item" >
-      <a class="nav-link" routerLinkActive="active" routerLink="/trainings">liste des formations</a>
-    </li>
-    <li class="nav-item" >
-      <a class="nav-link" routerLinkActive="active" routerLink="/cart">Panier</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" routerLink="/customerList">Client</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" routerLink="/userList">Utilisateurs</a>
-    </li>
-    @if(!authService.isLoggedIn()) {
-    <li class="nav-item" >
-      <a class="nav-link" routerLink="/login">Se connecter</a>
-    </li>
-    } @else {
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/logout">Se déconnecter</a>
-      </li>
-    }
+    <!-- Toggler -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    @if(authService.isAdmin()) {
-      <li>
-        <a class="nav-link" routerLinkActive="active" routerLink="/admin-trainings">Gérer les formations</a>
-      </li>
-    }
-  </ul>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <!-- Left nav -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/trainings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            liste des formations
+          </a>
+        </li>
 
-  @if (showSearchBar) {
-    <app-search-bar></app-search-bar>
-  }
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cart" routerLinkActive="active">
+            Panier
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/customerList" routerLinkActive="active">
+            Client
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/userList" routerLinkActive="active">
+            Utilisateurs
+          </a>
+        </li>
+
+        @if (authService.isAdmin()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin-trainings" routerLinkActive="active">
+              Gérer les formations
+            </a>
+          </li>
+        }
+      </ul>
+
+      <!-- Search (optional) -->
+      @if (showSearchBar) {
+        <div class="ms-lg-3 my-2 my-lg-0">
+          <app-search-bar></app-search-bar>
+        </div>
+      }
+
+      <!-- Right nav -->
+      <ul class="navbar-nav ms-auto">
+        @if (!authService.isLoggedIn()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">
+              Se connecter
+            </a>
+          </li>
+        } @else {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/logout" routerLinkActive="active">
+              Se déconnecter
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>
