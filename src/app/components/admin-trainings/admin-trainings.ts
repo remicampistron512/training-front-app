@@ -9,6 +9,7 @@ import {RouterLink} from '@angular/router';
 
 type SortKey = 'id' | 'name' | 'description' | 'price';
 type SortDir = 'asc' | 'desc';
+type Flash = { type: 'success' | 'danger' | 'info' | 'warning'; text: string };
 
 @Component({
   selector: 'app-admin-trainings',
@@ -20,6 +21,7 @@ type SortDir = 'asc' | 'desc';
   styleUrl: './admin-trainings.css',
 })
 export class AdminTrainings implements OnInit, OnDestroy{
+  flash: Flash | null = null;
   listTrainings: Training[] = [];
   filteredTrainings: Training[] = [];
 
@@ -54,9 +56,26 @@ export class AdminTrainings implements OnInit, OnDestroy{
       this.applyFilters();
     });
 
+    // After router navigation, Angular puts state in history.state
+    const flash = (history.state as any)?.flash as Flash | undefined;
+
+    if (flash?.text) {
+      this.flash = flash;
+
+      // Optional: auto-hide
+      setTimeout(() => (this.flash = null), 3000);
+
+      // Optional: clear the history state so it won't reappear
+      // if the user navigates around (back/forward)
+      history.replaceState({ ...history.state, flash: null }, '');
+    }
 
   }
 
+
+  closeFlash(): void {
+    this.flash = null;
+  }
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }

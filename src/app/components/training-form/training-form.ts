@@ -1,5 +1,5 @@
 // training-form.component.ts
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormsModule, NgForm} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api/api-service';
@@ -29,10 +29,12 @@ export class TrainingFormComponent implements OnInit {
   saving = false;
   errorMessage = '';
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +81,7 @@ export class TrainingFormComponent implements OnInit {
         this.originalModel = { ...this.model };
 
         this.loading = false;
-        console.log(this.loading);
+        this.cdr.detectChanges();
       },
       error: () => {
         this.errorMessage = "Impossible de charger la formation (introuvable ou erreur serveur).";
@@ -87,6 +89,8 @@ export class TrainingFormComponent implements OnInit {
       },
     });
   }
+
+
 
   onSubmit(form: NgForm): void {
     if (form.invalid) return;
@@ -111,8 +115,11 @@ export class TrainingFormComponent implements OnInit {
           this.originalModel = { ...this.model };
           this.saving = false;
 
-          // navigate where you want (example: details page)
-          this.router.navigate(['/trainings', this.trainingId]);
+
+          this.router.navigateByUrl('/admin-trainings', {
+            state: { flash: { type: 'success', text: 'Formation mise à jour avec succès.' } }
+          });
+
         },
         error: () => {
           this.errorMessage = "Erreur lors de la mise à jour.";

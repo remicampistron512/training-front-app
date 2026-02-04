@@ -21,7 +21,12 @@
     <ng-container>
 
 
-
+      @if (flash) {
+        <div class="alert alert-{{ flash.type }} alert-dismissible fade show" role="alert">
+          {{ flash.text }}
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeFlash()"></button>
+        </div>
+      }
       <table class="table table-striped table-hover">
         <thead>
         <tr>
