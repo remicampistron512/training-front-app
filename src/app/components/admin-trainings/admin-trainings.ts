@@ -168,6 +168,7 @@ export class AdminTrainings implements OnInit, OnDestroy{
     this.apiService.removeTraining(id).subscribe({
       next: () => {
         this.listTrainings = this.listTrainings.filter(t => t.id !== id);
+        this.flash = { type: 'success', text: 'La formation a été supprimée.' }
         this.applyFilters();
       },
       error: () => this.flash = { type: 'danger', text: 'Suppression échouée.' }
