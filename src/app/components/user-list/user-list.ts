@@ -31,6 +31,18 @@ export class UserList {
       }
   })
   }
+
+  protected removeUser(id: string) {
+    this.userService.removeUser(id).subscribe({
+      next: (data) => {
+        console.log('Deleted:', data);
+        this.getUsers();
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Error:', err),
+
+    })
+  }
 }
 
 

@@ -40,4 +40,8 @@ export class ApiService {
       params: { email }
     });
   }
+
+  public removeUser(id: string) {
+    return this.http.delete<User>(`${environment.host}/users/${id}`);
+  }
 }
