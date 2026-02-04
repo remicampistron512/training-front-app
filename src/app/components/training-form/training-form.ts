@@ -105,6 +105,7 @@ export class TrainingFormComponent implements OnInit {
       price: Number(this.model.price),
       stock: Number(this.model.stock),
       quantity: Number(this.model.quantity),
+      id: String(Date.now())
     };
 
     if (this.isEditMode && this.trainingId !== null) {
