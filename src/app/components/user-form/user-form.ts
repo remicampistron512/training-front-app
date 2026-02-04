@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef,Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {User} from '../../model/user/user.model';
 import {UserService} from '../../services/user/user.service';
 import {Router} from '@angular/router';
 import {ApiService} from '../../services/api/api-service';
+import {HashService} from '../../services/hash.service';
 
 @Component({
   selector: 'app-user-form',
@@ -23,20 +24,29 @@ export class UserForm {
     phone: '',
     email: '',
     password: '',
-    role: ''
+    role: '',
+    passwordHash: ''
   };
-  constructor(private userService: UserService, private router: Router,private users: ApiService) { }
+  constructor(private userService: UserService, private router: Router,private users: ApiService,private hash:HashService,private cdr: ChangeDetectorRef ) { }
 
   protected onSaveUser() {
 
     this.push();
-    this.router.navigate(['/userList']); // navigate AFTER save/log
+
 
   }
-  push() {
+  async push() {
+      this.user.passwordHash = await this.hash.hashPassword(this.user.password);
+
       this.users.addUser(this.user).subscribe({
-      next: (created) => console.log('Created:', created),
+      next: (created) => {
+        console.log('Created:', created);
+        this.router.navigate(['/userList']); // navigate AFTER save/log
+        this.cdr.detectChanges();
+
+      },
       error: (err) => console.error('Error:', err),
     });
+
   }
 }

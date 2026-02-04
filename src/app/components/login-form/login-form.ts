@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ApiService} from '../../services/api/api-service';
 import {Router} from '@angular/router';
+import {HashService} from '../../services/hash.service';
 
 @Component({
   selector: 'app-login-form',
@@ -15,18 +16,21 @@ export class LoginForm {
   enteredPassword= '';
   user: any;
   error: string | null = null;
-  constructor(private apiService: ApiService,private router: Router) {
+  constructor(private apiService: ApiService,private router: Router, private hashService:HashService) {
   }
 
   getUserByEmail():any {
     this.apiService.getUserByEmail(this.enteredLogin).subscribe({
-      next: (user) => {
+      next: async (user) => {
         if (!user) {
           console.log('auth not ok (user not found)');
           return;
         }
         this.user = user[0];
-        if (this.user.password === this.enteredPassword) {
+
+        const ok = await this.hashService.verifyPassword(this.enteredPassword, this.user.passwordHash);
+
+        if (ok) {
           console.log('auth ok');
           localStorage.setItem('user', JSON.stringify(user));
           this.router.navigateByUrl('/trainings'); // or '/'

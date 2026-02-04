@@ -25,21 +25,17 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/cart" routerLinkActive="active">
-            Panier
-          </a>
-        </li>
+
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/customerList" routerLinkActive="active">
-            Client
+            Gérer les Clients
           </a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/userList" routerLinkActive="active">
-            Utilisateurs
+            Gérer les Utilisateurs
           </a>
         </li>
 
@@ -61,6 +57,11 @@
 
       <!-- Right nav -->
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cart" routerLinkActive="active">
+            Panier
+          </a>
+        </li>
         @if (!authService.isLoggedIn()) {
           <li class="nav-item">
             <a class="nav-link" routerLink="/login" routerLinkActive="active">
