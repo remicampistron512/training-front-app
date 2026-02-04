@@ -132,7 +132,9 @@ export class TrainingFormComponent implements OnInit {
           this.saving = false;
 
           // after create, you can redirect to details or list
-          this.router.navigate(['/trainings', created.id]);
+          this.router.navigateByUrl('/admin-trainings', {
+            state: { flash: { type: 'success', text: 'Formation créée avec succès.' } }
+          });
         },
         error: () => {
           this.errorMessage = "Erreur lors de la création.";
