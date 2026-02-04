@@ -27,6 +27,7 @@
           <button type="button" class="btn-close" aria-label="Close" (click)="closeFlash()"></button>
         </div>
       }
+      <button routerLink="/training-form" class="btn btn-primary">Ajouter formation</button>
       <table class="table table-striped table-hover">
         <thead>
         <tr>
@@ -38,6 +39,7 @@
         </thead>
 
         <tbody>
+
           @for (training of filteredTrainings; track training.id) {
             <tr>
               <td>{{ training.id }}</td>
@@ -52,7 +54,7 @@
               <td><button routerLink="/training-form" class="btn btn-danger">Supprimer</button></td>
             </tr>
           }
-          <tr><button routerLink="/training-form" class="btn btn-primary">Ajouter formation</button></tr>
+
         </tbody>
       </table>
     </ng-container>
