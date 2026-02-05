@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import { SearchBar } from './components/search-bar/search-bar';
 import {AuthService} from './services/auth/auth.service';
 import {ThemeService} from './services/theme.service';
+import {CartService} from './services/cart/cart.service';
 
 
 @Component({
@@ -18,8 +19,9 @@ export class App implements OnInit{
   authService ;
   showSearchBar = false;
 
-  constructor(private router: Router, authService:AuthService, public theme:ThemeService) {
+  constructor(private router: Router, authService:AuthService,public cartService:CartService, public theme:ThemeService) {
     this.authService = authService;
+    this.cartService = cartService;
     this.router.events
       .pipe(
         filter(e => e instanceof NavigationEnd)

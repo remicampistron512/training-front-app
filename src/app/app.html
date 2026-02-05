@@ -58,7 +58,7 @@
       <!-- Right nav -->
       <ul class="navbar-nav ms-auto">
         <li class="">
-        <button type="button" class="align-bottom mt-2 btn btn-link nav-link p-0" (click)="theme.toggle()" aria-label="Toggle dark mode">
+        <button type="button" class="align-bottom mt-2 mx-2 btn btn-link nav-link p-0" (click)="theme.toggle()" aria-label="Toggle dark mode">
           @if (theme.isDark) {
             <i class="bi bi-sun"></i>
           } @else {
@@ -67,9 +67,13 @@
         </button>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/cart" routerLinkActive="active">
+
+          <button type="button" class="btn btn-primary position-relative">
+            <i class="bi bi-cart"></i>
             Panier
-          </a>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{cartService.getTrainings().length}}</span>
+
+          </button>
         </li>
         @if (!authService.isLoggedIn()) {
           <li class="nav-item">
