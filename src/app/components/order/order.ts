@@ -17,7 +17,7 @@ export class Order {
   constructor(
     public cartService: CartService,
     public authService: AuthService,
-    private router: Router
+    protected router: Router
   ) {}
 
   get trainings(): Training[] {
@@ -30,7 +30,7 @@ export class Order {
 
   // Quantité sécurisée (>=1)
   qty(t: Training): number {
-    const q = Number(t.stock ?? 1);
+    const q = Number(t.quantity ?? 1);
     return Number.isFinite(q) && q > 0 ? q : 1;
   }
 
@@ -68,9 +68,9 @@ export class Order {
       total: this.total,
     });
 
-    // Optionnel: vider le panier si tu as une méthode
-    // this.cartService.clear();
 
-    this.router.navigate(['/trainings']); // ou /order-success
+
+
+    this.router.navigate(['/finalizeOrder']); // ou /order-success
   }
 }

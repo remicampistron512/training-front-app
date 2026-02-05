@@ -41,18 +41,21 @@
     </table>
 
     <div class="d-flex gap-2 mt-3">
+      @if (!router.url.includes('/finalizeOrder')) {
       <button class="btn btn-outline-secondary" (click)="goBackToCart()">
         Modifier le panier
       </button>
 
-      @if (isLoggedIn) {
-        <button class="btn btn-success" (click)="confirmOrder()">
-          Confirmer la commande
-        </button>
-      } @else {
-        <a class="btn btn-primary" [routerLink]="['/login']" [queryParams]="{ returnUrl: '/order' }">
-          Se connecter pour confirmer
-        </a>
+          @if (isLoggedIn) {
+            <button class="btn btn-success" (click)="confirmOrder()">
+              Confirmer la commande
+            </button>
+          } @else {
+            <a class="btn btn-primary" [routerLink]="['/login']" [queryParams]="{ returnUrl: '/order' }">
+              Se connecter pour confirmer
+            </a>
+          }
+
       }
     </div>
   }

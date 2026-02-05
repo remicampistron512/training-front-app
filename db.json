@@ -1,15 +1,6 @@
 {
   "users": [
     {
-      "id": "1770112464429",
-      "name": "qsdqs",
-      "firstName": "qsdqsd",
-      "address": "qsqsd",
-      "phone": "qsdqsd",
-      "email": "qsqsd",
-      "password": "qsd"
-    },
-    {
       "id": "1770123886905",
       "name": "Rémi",
       "firstName": "Campistron",
@@ -58,31 +49,53 @@
       "email": "bob",
       "password": "bob",
       "role": "admin"
+    },
+    {
+      "id": "1770208213725",
+      "name": "Bobhash",
+      "firstName": "bob",
+      "address": "78, rue du hash",
+      "phone": "6765644",
+      "email": "bob",
+      "password": "bob",
+      "role": "admin",
+      "passwordHash": "$2b$10$7Hy/dg7K./WXcg3iTjGnAulwLrtC8k.94nOvHAYpw.8P7ZVjZzy3u"
+    },
+    {
+      "id": "1770208547838",
+      "name": "bobhash2",
+      "firstName": "bobhash",
+      "address": "hash",
+      "phone": "5566777",
+      "email": "test",
+      "password": "test",
+      "role": "admin",
+      "passwordHash": "$2b$10$O0YMLJ/genVKaaq46KRzbOYW0IshdvNWgj0IIzeyFZcrpeK6TCTR."
+    },
+    {
+      "id": "1770208632436",
+      "name": "ezaeazeTEST",
+      "firstName": "sqqsqsd",
+      "address": "qsdqsd",
+      "phone": "qsddqs",
+      "email": "qsdqsd",
+      "password": "qsdqs",
+      "role": "admin",
+      "passwordHash": "$2b$10$wVWaQkf5.lecIF9TMTHRne2bWasyX2nWEXi8uo5eMaj7sRZuRsANW"
+    },
+    {
+      "id": "1770209247844",
+      "name": "hashman",
+      "firstName": "hashman",
+      "address": "hashman",
+      "phone": "hashman",
+      "email": "hash",
+      "password": "hash",
+      "role": "admin",
+      "passwordHash": "$2b$10$tj0hiDZvblsW5SbwG55Jy.RfGx/HDfMo0vJiIk.shd4DOppsBo.6e"
     }
   ],
   "trainings": [
-    {
-      "name": "Angular TEST (Fundamentals)",
-      "description": "Components, templates, directives, services, routing, forms. Build a complete SPA.",
-      "price": 790,
-      "stock": 10,
-      "quantity": 1,
-      "id": "1"
-    },
-    {
-      "id": "2",
-      "name": "TypeScript for JavaScript Developers",
-      "description": "Types, interfaces, generics, union types, type narrowing, async patterns, best practices.",
-      "price": 490,
-      "quantity": 1
-    },
-    {
-      "id": "3",
-      "name": "Spring Boot (REST API)",
-      "description": "REST, validation, JPA/Hibernate, DTO mapping, error handling, pagination, testing.",
-      "price": 990,
-      "quantity": 1
-    },
     {
       "name": "Docker & Containers (Hands-on) testetststst",
       "description": "Images, Dockerfile, Compose, volumes, networks, debugging, basic CI workflow.",
@@ -125,20 +138,71 @@
       "description": "XSS, CSRF, SQLi, auth/session, password hashing, common mitigations and secure defaults.",
       "price": 680,
       "quantity": 1
+    }
+  ],
+  "customers": [
+    {
+      "id": "1b84"
     },
     {
-      "id": "10",
-      "name": "Agile Project Delivery (Scrum)",
-      "description": "Roles, ceremonies, backlog management, estimation, sprint planning, definition of done.",
-      "price": 420,
-      "quantity": 1
+      "id": "779c"
     },
     {
-      "id": "0",
-      "name": "test",
-      "description": "tetststststt",
-      "price": 500,
-      "quantity": 500
+      "id": "",
+      "name": "gfdgd",
+      "firstName": "qsdqsd",
+      "address": "fedsf",
+      "phone": "azeaze",
+      "email": "sdfsdf"
+    },
+    {
+      "id": "",
+      "name": "gfdgd",
+      "firstName": "qsdqsd",
+      "address": "fedsf",
+      "phone": "azeaze",
+      "email": "sdfsdf"
+    },
+    {
+      "id": "",
+      "name": "bob",
+      "firstName": "dfdfg",
+      "address": "bob",
+      "phone": "sdfsdf",
+      "email": "bob"
+    },
+    {
+      "id": "",
+      "name": "gfdgd",
+      "firstName": "qsdqsd",
+      "address": "bob",
+      "phone": "azeaze",
+      "email": "sdfsdf"
+    },
+    {
+      "id": "",
+      "name": "gfdgd",
+      "firstName": "qsdqsd",
+      "address": "bob",
+      "phone": "sdfsdf",
+      "email": "fdg"
+    },
+    {
+      "id": "",
+      "name": "gfdgd",
+      "firstName": "bob",
+      "address": "fedsf",
+      "phone": "fdgdg",
+      "email": "bob"
+    },
+    {
+      "id": "1770298364805",
+      "name": "gfdgd",
+      "firstName": "bob",
+      "address": "qsdqsd",
+      "phone": "sdfsdf",
+      "email": "sdfsdf",
+      "userId": "1770209247844"
     }
   ]
 }

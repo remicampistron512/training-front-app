@@ -14,6 +14,7 @@ import {Logout} from './components/logout/logout';
 import {adminGuard} from './components/admin-guard'
 import {TrainingFormComponent} from './components/training-form/training-form';
 import {AdminTrainings} from './components/admin-trainings/admin-trainings';
+import {FinalizeOrder} from './components/finalize-order/finalize-order';
 
 /* Les routes sont pris en compte dans l'ordre (de haut en bas) */
 export const routes: Routes = [
@@ -34,6 +35,7 @@ export const routes: Routes = [
   { path: 'admin-trainings',component: AdminTrainings},
   { path: 'trainings/new', component: TrainingFormComponent },
   { path: 'trainings/:id/edit', component: TrainingFormComponent },
+  { path: 'finalizeOrder', component: FinalizeOrder},
   { path : '**', redirectTo: "/404"},
 
 ];

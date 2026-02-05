@@ -9,6 +9,7 @@ import {ApiService} from '../../services/api/api-service';
 
 type SortKey = 'id' | 'name' | 'description' | 'price';
 type SortDir = 'asc' | 'desc';
+type Flash = { type: 'success' | 'danger' | 'info' | 'warning'; text: string };
 
 @Component({
   selector: 'app-trainings',
@@ -39,6 +40,10 @@ export class Trainings implements OnInit, OnDestroy {
 
 
   }
+  flash: Flash | null = null;
+  closeFlash(): void {
+    this.flash = null;
+  }
 
   ngOnInit(): void {
 
@@ -51,6 +56,15 @@ export class Trainings implements OnInit, OnDestroy {
       this.applyFilters();
     });
 
+    // Read flash from navigation state (works after router navigation)
+    const state = history.state as { flash?: Flash };
+    this.flash = state?.flash ?? null;
+
+    this.getAllTrainings();
+    this.sub = this.search.term$.subscribe(term => {
+      this.searchTerm = term ?? '';
+      this.applyFilters();
+    });
 
   }
 

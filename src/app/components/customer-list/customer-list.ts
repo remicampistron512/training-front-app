@@ -1,25 +1,21 @@
-import { Component } from '@angular/core';
-import {ReactiveFormsModule} from '@angular/forms';
-import {Customer} from '../../model/customer/customer.model';
-import {RouterLink} from '@angular/router';
-import {CustomerService} from '../../services/customer/customer.service';
+import {Component, inject, OnInit} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Customer } from '../../model/customer/customer.model';
+import { CustomerService } from '../../services/customer/customer.service';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-customer-list',
-  imports: [
-    ReactiveFormsModule,
-    RouterLink
-  ],
+  imports: [RouterLink, AsyncPipe],
   templateUrl: './customer-list.html',
   styleUrl: './customer-list.css',
 })
 export class CustomerList {
-  listCustomers : Customer[] | undefined;
-  constructor(private customerService: CustomerService) { }
 
-  ngOnInit() : void {
-    this.listCustomers = this.customerService.getCustomers();
-  }
+  error: string | null = null;
+  private readonly customerService = inject(CustomerService)
+  //constructor(private readonly customerService: CustomerService) {}
+  listCustomers = this.customerService.getCustomers();
 
 
 }

@@ -1,15 +1,15 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {User} from '../../model/user/user.model';
 import {RouterLink} from '@angular/router';
 import {ApiService} from '../../services/api/api-service';
 
 @Component({
   selector: 'app-user-list',
-  imports: [ RouterLink],
+  imports: [RouterLink],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
 })
-export class UserList {
+export class UserList implements OnInit {
   listUsers : User[] | undefined;
   error: string | null = null;
   constructor(private userService: ApiService,private cdr: ChangeDetectorRef) {

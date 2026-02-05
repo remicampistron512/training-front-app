@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-          @for (customer of listCustomers; track customer.id){
+          @for (customer of listCustomers | async; track customer.id){
             <tr>
               <td>{{customer.id}}</td>
               <td>{{customer.name}}</td>
