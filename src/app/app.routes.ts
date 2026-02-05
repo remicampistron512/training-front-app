@@ -15,6 +15,7 @@ import {adminGuard} from './components/admin-guard'
 import {TrainingFormComponent} from './components/training-form/training-form';
 import {AdminTrainings} from './components/admin-trainings/admin-trainings';
 import {FinalizeOrder} from './components/finalize-order/finalize-order';
+//import {FinalizeOrder} from './components/finalize-order/finalize-order';
 
 /* Les routes sont pris en compte dans l'ordre (de haut en bas) */
 export const routes: Routes = [

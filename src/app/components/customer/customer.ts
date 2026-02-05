@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { CustomerService } from '../../services/customer/customer.service';
 import { Customer } from '../../model/customer/customer.model';
+import {CartService} from '../../services/cart/cart.service';
 
 type StoredUser = { id: string; email: string; login?: string };
 type Flash = { type: 'success' | 'danger' | 'info' | 'warning'; text: string };
@@ -30,7 +31,8 @@ export class CustomerComponent implements OnInit {
   constructor(
     private readonly customerService: CustomerService,
     protected router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -111,6 +113,7 @@ export class CustomerComponent implements OnInit {
 
     this.customerService.getCustomerByUserId(this.userId).subscribe({
       next: (existing) => {
+        this.cartService.clear();
         // Client déjà existant : pas besoin de le recréer
         if (existing) {
           this.router.navigateByUrl('/trainings', {
@@ -128,6 +131,7 @@ export class CustomerComponent implements OnInit {
           },
           error: (err) => console.error('Add failed:', err),
         });
+
       },
       error: (err) => console.error('Lookup failed:', err),
     });

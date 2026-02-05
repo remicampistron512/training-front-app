@@ -38,6 +38,7 @@ export class CartService {
   }
 
   clear(): void {
+    console.log("clear");
     this.state.trainings = [];
     this.save();
   }
