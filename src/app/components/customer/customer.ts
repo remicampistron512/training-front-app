@@ -7,7 +7,7 @@ import { Customer } from '../../model/customer/customer.model';
 import {CartService} from '../../services/cart/cart.service';
 
 type StoredUser = { id: string; email: string; login?: string };
-type Flash = { type: 'success' | 'danger' | 'info' | 'warning'; text: string };
+
 
 @Component({
   selector: 'app-customer',
@@ -19,8 +19,7 @@ type Flash = { type: 'success' | 'danger' | 'info' | 'warning'; text: string };
 })
 export class CustomerComponent implements OnInit {
 
-  // Message flash (succès/erreur/info) utilisé lors de la navigation/validation
-  flash: Flash | null = null;
+
 
   // Identifiant de l'utilisateur connecté (récupéré depuis localStorage)
   userId: string | null = null;

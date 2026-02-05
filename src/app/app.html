@@ -27,19 +27,20 @@
 
 
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/customerList" routerLinkActive="active">
-            Gérer les Clients
-          </a>
-        </li>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/userList" routerLinkActive="active">
-            Gérer les Utilisateurs
-          </a>
-        </li>
 
         @if (authService.isAdmin()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/customerList" routerLinkActive="active">
+              Gérer les Clients
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/userList" routerLinkActive="active">
+              Gérer les Utilisateurs
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin-trainings" routerLinkActive="active">
               Gérer les formations
@@ -48,12 +49,7 @@
         }
       </ul>
 
-      <!-- Search (optional) -->
-      @if (showSearchBar) {
-        <div class="ms-lg-3 my-2 my-lg-0">
-          <app-search-bar></app-search-bar>
-        </div>
-      }
+
 
       <!-- Right nav -->
       <ul class="navbar-nav ms-auto">
@@ -92,5 +88,5 @@
     </div>
   </div>
 </nav>
-
+<app-flash></app-flash>
 <router-outlet></router-outlet>

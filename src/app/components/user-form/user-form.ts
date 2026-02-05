@@ -6,6 +6,7 @@ import { User } from '../../model/user/user.model';
 import { UserService } from '../../services/user/user.service';
 import { ApiService } from '../../services/api/api-service';
 import { HashService } from '../../services/hash.service';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-user-form',
@@ -35,7 +36,8 @@ export class UserForm {
     private router: Router,                // navigation après création
     private users: ApiService,             // appels API (création user)
     private hash: HashService,             // hash du mot de passe
-    private cdr: ChangeDetectorRef         // forçage éventuel de rafraîchissement de vue
+    private cdr: ChangeDetectorRef,         // forçage éventuel de rafraîchissement de vue
+    private auth: AuthService               // permet de savoir si l'utilisateur est admin ou non'
   ) {}
 
   // Handler appelé par le bouton "Enregistrer"
@@ -44,6 +46,7 @@ export class UserForm {
   }
 
   // Prépare les données (hash du mot de passe) puis envoie la création à l'API
+
   async push(): Promise<void> {
     // Ne jamais envoyer le mot de passe en clair : on calcule le hash côté front (démo)
     this.user.passwordHash = await this.hash.hashPassword(this.user.password);
@@ -52,9 +55,12 @@ export class UserForm {
     this.users.addUser(this.user).subscribe({
       next: (created) => {
         console.log('Created:', created);
-
-        // Redirection vers la liste des utilisateurs
-        this.router.navigate(['/userList']);
+        if(this.auth.isAdmin()) {
+          // Redirection vers la liste des utilisateurs
+          this.router.navigate(['/userList']);
+        } else {
+          this.router.navigate(['/trainings']);
+        }
 
         // Forçage éventuel de l'update (souvent inutile si change detection standard)
         this.cdr.detectChanges();

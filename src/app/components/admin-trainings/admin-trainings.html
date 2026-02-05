@@ -16,17 +16,15 @@
     <button class="btn btn-outline-secondary" type="button" (click)="setMaxPrice(null)">
       réinitialiser
     </button>
+    <div class="ms-lg-3 my-2 my-lg-0">
+      <app-search-bar></app-search-bar>
+    </div>
   </div>
   @if (filteredTrainings.length) {
     <ng-container>
 
 
-      @if (flash) {
-        <div class="alert alert-{{ flash.type }} alert-dismissible fade show" role="alert">
-          {{ flash.text }}
-          <button type="button" class="btn-close" aria-label="Close" (click)="closeFlash()"></button>
-        </div>
-      }
+
       <button routerLink="/training-form" class="btn btn-primary">Ajouter formation</button>
       <table class="table table-striped table-hover">
         <thead>

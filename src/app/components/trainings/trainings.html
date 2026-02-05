@@ -1,10 +1,5 @@
-@if (flash) {
-  <div class="alert alert-{{ flash.type }} alert-dismissible fade show" role="alert">
-    {{ flash.text }}
-    <button type="button" class="btn-close" aria-label="Close" (click)="closeFlash()"></button>
-  </div>
-}
-<div>
+
+<div class="container">
   <div class="d-flex gap-2 mb-3 align-items-center">
     <label class="form-label mb-0">Prix maximum:</label>
 
@@ -22,6 +17,12 @@
     <button class="btn btn-outline-secondary" type="button" (click)="setMaxPrice(null)">
       Réinitialiser
     </button>
+    <!-- Search (optional) -->
+
+      <div class="ms-lg-3 my-2 my-lg-0">
+        <app-search-bar></app-search-bar>
+      </div>
+
   </div>
   @if (filteredTrainings.length) {
     <ng-container>

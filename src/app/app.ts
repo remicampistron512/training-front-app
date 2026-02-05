@@ -5,12 +5,13 @@ import { SearchBar } from './components/search-bar/search-bar';
 import {AuthService} from './services/auth/auth.service';
 import {ThemeService} from './services/theme.service';
 import {CartService} from './services/cart/cart.service';
+import {FlashComponent} from './components/flash/flash.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, SearchBar, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, SearchBar, RouterLinkActive, FlashComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -1,208 +1,186 @@
 {
   "users": [
     {
-      "id": "1770123886905",
-      "name": "Rémi",
-      "firstName": "Campistron",
-      "address": "78,rue du treuild",
-      "phone": "05580",
-      "email": "email",
+      "id": "1770313290742",
+      "name": "Henry",
+      "firstName": "",
+      "address": "",
+      "phone": "0558756778",
+      "email": "remi.campistron@gmail.com",
       "password": "1234",
-      "role": ""
+      "role": "admin",
+      "passwordHash": "$2b$10$NtTiqkWyjAwAF3/o5KtVguSZulpQZIIJqecGg/WOzgVFlsjFEwvSS"
     },
     {
-      "id": "1770124090886",
-      "name": "bob",
-      "firstName": "bobb",
-      "address": "ikii",
-      "phone": "iii",
-      "email": "iii",
-      "password": "ii",
-      "role": ""
+      "id": "1770313359819",
+      "name": "Campistron",
+      "firstName": "Rémi",
+      "address": "78,rue du treuilh",
+      "phone": "0558756778",
+      "email": "remi.campistron@gmail.com",
+      "password": "5432",
+      "role": "admin",
+      "passwordHash": "$2b$10$4lUd1Qn/ZZoIQ6n536OzBu7J9dldUJ5MlJJGKXm4Q88gfYgdjFmZS"
     },
     {
-      "id": "1770124221756",
-      "name": "hjhj",
-      "firstName": "hgghj",
-      "address": "ghjghj",
-      "phone": "ghjhgj",
-      "email": "hgjgh",
-      "password": "hgjghj",
-      "role": ""
-    },
-    {
-      "id": "1770124298348",
-      "name": "qsdqsd",
-      "firstName": "qsdqsd",
-      "address": "qsdqsd",
+      "id": "1770315224431",
+      "name": "Campistron",
+      "firstName": "Rémi",
+      "address": "78,rue du treuilh",
       "phone": "qsdqsd",
-      "email": "qsqsds",
-      "password": "qsdqs",
-      "role": "user"
-    },
-    {
-      "id": "1770130182828",
-      "name": "bob",
-      "firstName": "bobby",
-      "address": "1234",
-      "phone": "1235",
-      "email": "bob",
-      "password": "bob",
-      "role": "admin"
-    },
-    {
-      "id": "1770208213725",
-      "name": "Bobhash",
-      "firstName": "bob",
-      "address": "78, rue du hash",
-      "phone": "6765644",
-      "email": "bob",
-      "password": "bob",
+      "email": "remi.campistron@gmail.com",
+      "password": "1234",
       "role": "admin",
-      "passwordHash": "$2b$10$7Hy/dg7K./WXcg3iTjGnAulwLrtC8k.94nOvHAYpw.8P7ZVjZzy3u"
-    },
-    {
-      "id": "1770208547838",
-      "name": "bobhash2",
-      "firstName": "bobhash",
-      "address": "hash",
-      "phone": "5566777",
-      "email": "test",
-      "password": "test",
-      "role": "admin",
-      "passwordHash": "$2b$10$O0YMLJ/genVKaaq46KRzbOYW0IshdvNWgj0IIzeyFZcrpeK6TCTR."
-    },
-    {
-      "id": "1770208632436",
-      "name": "ezaeazeTEST",
-      "firstName": "sqqsqsd",
-      "address": "qsdqsd",
-      "phone": "qsddqs",
-      "email": "qsdqsd",
-      "password": "qsdqs",
-      "role": "admin",
-      "passwordHash": "$2b$10$wVWaQkf5.lecIF9TMTHRne2bWasyX2nWEXi8uo5eMaj7sRZuRsANW"
-    },
-    {
-      "id": "1770209247844",
-      "name": "hashman",
-      "firstName": "hashman",
-      "address": "hashman",
-      "phone": "hashman",
-      "email": "hash",
-      "password": "hash",
-      "role": "admin",
-      "passwordHash": "$2b$10$tj0hiDZvblsW5SbwG55Jy.RfGx/HDfMo0vJiIk.shd4DOppsBo.6e"
+      "passwordHash": "$2b$10$.m6RwbjCaytF/UnpjPSUaeZ88CJ4gUBQi.yZFdncoKYYMhHob7bui"
     }
   ],
   "trainings": [
     {
-      "name": "Docker & Containers (Hands-on) testetststst",
-      "description": "Images, Dockerfile, Compose, volumes, networks, debugging, basic CI workflow.",
-      "price": 650,
-      "stock": 0,
+      "name": "Java Spring Boot Masterclass",
+      "description": "REST APIs, JPA/Hibernate, validation, security basics, testing, layered architecture.",
+      "price": 720,
+      "stock": 12,
+      "quantity": 1,
+      "id": "2"
+    },
+    {
+      "name": "Angular Frontend Development",
+      "description": "Components, services, routing, RxJS, forms, HTTP client, best practices.",
+      "price": 590,
+      "stock": 8,
+      "quantity": 1,
+      "id": "3"
+    },
+    {
+      "name": "React & TypeScript Bootcamp",
+      "description": "Hooks, state management, reusable components, routing, API integration, deployment.",
+      "price": 610,
+      "stock": 15,
       "quantity": 1,
       "id": "4"
     },
     {
-      "id": "5",
-      "name": "SQL & Relational Databases",
-      "description": "Modeling, joins, indexes, transactions, normalization, performance basics (MySQL/MariaDB).",
+      "name": "Python for Data Analysis",
+      "description": "NumPy, Pandas, data cleaning, visualization, real datasets, mini-projects.",
       "price": 540,
-      "quantity": 1
+      "stock": 20,
+      "quantity": 1,
+      "id": "5"
     },
     {
-      "id": "6",
-      "name": "Node.js + Express (Backend Essentials)",
-      "description": "REST APIs, middleware, auth basics, validation, error handling, testing and tooling.",
-      "price": 720,
-      "quantity": 1
+      "name": "SQL & Database Fundamentals",
+      "description": "Queries, joins, indexing, normalization, transactions, MySQL/MariaDB practice.",
+      "price": 450,
+      "stock": 18,
+      "quantity": 1,
+      "id": "6"
     },
     {
-      "id": "7",
-      "name": "Git & GitHub Workflow",
-      "description": "Branching strategy, pull requests, code reviews, rebase vs merge, resolving conflicts.",
-      "price": 290,
-      "quantity": 1
+      "name": "Linux Administration Essentials",
+      "description": "Shell commands, users, permissions, systemd, logs, networking, troubleshooting.",
+      "price": 500,
+      "stock": 10,
+      "quantity": 1,
+      "id": "7"
     },
     {
-      "id": "8",
-      "name": "Clean Architecture & SOLID (Java)",
-      "description": "Layered architecture, dependency inversion, DTO/DAO patterns, unit testing, refactoring.",
+      "name": "DevOps Foundations",
+      "description": "CI/CD pipelines, Git workflows, infrastructure basics, monitoring, automation.",
+      "price": 700,
+      "stock": 7,
+      "quantity": 1,
+      "id": "8"
+    },
+    {
+      "name": "Kubernetes Fundamentals",
+      "description": "Pods, deployments, services, ingress, configmaps, secrets, Helm introduction.",
       "price": 850,
-      "quantity": 1
+      "stock": 5,
+      "quantity": 1,
+      "id": "9"
     },
     {
-      "id": "9",
-      "name": "Web Security Basics (OWASP)",
-      "description": "XSS, CSRF, SQLi, auth/session, password hashing, common mitigations and secure defaults.",
-      "price": 680,
-      "quantity": 1
+      "name": "Node.js Backend APIs",
+      "description": "Express, REST API design, middleware, authentication, MongoDB integration.",
+      "price": 580,
+      "stock": 14,
+      "quantity": 1,
+      "id": "10"
+    },
+    {
+      "name": "Git & GitHub Professional Workflow",
+      "description": "Branches, merge/rebase, PRs, conflict resolution, tags, releases, GitHub Actions.",
+      "price": 420,
+      "stock": 30,
+      "quantity": 1,
+      "id": "12"
+    },
+    {
+      "name": "Microservices with Spring Cloud",
+      "description": "Service discovery, config server, API gateway, resilience patterns, tracing.",
+      "price": 900,
+      "stock": 4,
+      "quantity": 1,
+      "id": "14"
+    },
+    {
+      "name": "Testing in Java (JUnit & Mockito)",
+      "description": "Unit tests, mocking, integration tests, test coverage, best practices.",
+      "price": 520,
+      "stock": 16,
+      "quantity": 1,
+      "id": "15"
+    },
+    {
+      "name": "Web Development Fundamentals",
+      "description": "HTML, CSS, responsive design, JavaScript basics, DOM manipulation, forms.",
+      "price": 390,
+      "stock": 25,
+      "quantity": 1,
+      "id": "16"
+    },
+    {
+      "name": "TypeScript Complete Guide",
+      "description": "Types, interfaces, generics, OOP, async/await, modules, tooling and config.",
+      "price": 470,
+      "stock": 22,
+      "quantity": 1,
+      "id": "17"
+    },
+    {
+      "name": "Cloud Computing with AWS (Starter)",
+      "description": "EC2, S3, IAM, VPC basics, security groups, deployment fundamentals.",
+      "price": 880,
+      "stock": 3,
+      "quantity": 1,
+      "id": "18"
+    },
+    {
+      "name": "CI/CD with GitHub Actions",
+      "description": "Workflows, builds, tests, Docker integration, deployment pipeline examples.",
+      "price": 630,
+      "stock": 11,
+      "quantity": 1,
+      "id": "19"
+    },
+    {
+      "name": "Full Stack Project Workshop",
+      "description": "Frontend + backend integration, database, authentication, deployment project.",
+      "price": 950,
+      "stock": 2,
+      "quantity": 1,
+      "id": "20"
     }
   ],
   "customers": [
     {
-      "id": "1b84"
-    },
-    {
-      "id": "779c"
-    },
-    {
-      "id": "",
-      "name": "gfdgd",
-      "firstName": "qsdqsd",
-      "address": "fedsf",
-      "phone": "azeaze",
-      "email": "sdfsdf"
-    },
-    {
-      "id": "",
-      "name": "gfdgd",
-      "firstName": "qsdqsd",
-      "address": "fedsf",
-      "phone": "azeaze",
-      "email": "sdfsdf"
-    },
-    {
-      "id": "",
-      "name": "bob",
-      "firstName": "dfdfg",
-      "address": "bob",
-      "phone": "sdfsdf",
-      "email": "bob"
-    },
-    {
-      "id": "",
-      "name": "gfdgd",
-      "firstName": "qsdqsd",
-      "address": "bob",
-      "phone": "azeaze",
-      "email": "sdfsdf"
-    },
-    {
-      "id": "",
-      "name": "gfdgd",
-      "firstName": "qsdqsd",
-      "address": "bob",
-      "phone": "sdfsdf",
-      "email": "fdg"
-    },
-    {
-      "id": "",
-      "name": "gfdgd",
-      "firstName": "bob",
-      "address": "fedsf",
-      "phone": "fdgdg",
-      "email": "bob"
-    },
-    {
-      "id": "1770298364805",
-      "name": "gfdgd",
-      "firstName": "bob",
-      "address": "qsdqsd",
-      "phone": "sdfsdf",
-      "email": "sdfsdf",
-      "userId": "1770209247844"
+      "id": "1770310353651",
+      "name": "Campistron",
+      "firstName": "Rémi",
+      "address": "78,rue du treuilh",
+      "phone": "0558756778",
+      "email": "remi.campistron@gmail.com",
+      "userId": null
     }
   ]
 }

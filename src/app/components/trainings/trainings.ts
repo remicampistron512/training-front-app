@@ -6,16 +6,17 @@ import { Training } from '../../model/training/training.model';
 import { CartService } from '../../services/cart/cart.service';
 import { TrainingSearchService } from '../../services/search-bar/training-search.service';
 import { ApiService } from '../../services/api/api-service';
+import {SearchBar} from '../search-bar/search-bar';
 
 type SortKey = 'id' | 'name' | 'description' | 'price';
 type SortDir = 'asc' | 'desc';
-type Flash = { type: 'success' | 'danger' | 'info' | 'warning'; text: string };
+
 
 @Component({
   selector: 'app-trainings',
   standalone: true,
   // Formulaire template-driven (ngModel) pour filtres / quantités
-  imports: [FormsModule],
+  imports: [FormsModule, SearchBar],
   templateUrl: './trainings.html',
   styleUrl: './trainings.css',
 })
@@ -40,8 +41,7 @@ export class Trainings implements OnInit, OnDestroy {
   // Erreur API éventuelle
   error: string | null = null;
 
-  // Message flash reçu via navigation state
-  flash: Flash | null = null;
+
 
   // Abonnement au flux de recherche (à libérer)
   private sub?: Subscription;
@@ -63,9 +63,7 @@ export class Trainings implements OnInit, OnDestroy {
       this.applyFilters();
     });
 
-    // 3) Récupérer un flash éventuellement passé via navigation (history.state)
-    const state = history.state as { flash?: Flash };
-    this.flash = state?.flash ?? null;
+
   }
 
   ngOnDestroy(): void {
@@ -73,10 +71,7 @@ export class Trainings implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 
-  // Ferme le flash depuis le template
-  closeFlash(): void {
-    this.flash = null;
-  }
+
 
   // Récupère les formations depuis l'API, normalise quelques champs, puis filtre/tri
   getAllTrainings(): void {

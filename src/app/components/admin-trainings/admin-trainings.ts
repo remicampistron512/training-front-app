@@ -7,21 +7,22 @@ import { ApiService } from '../../services/api/api-service';
 import { Training } from '../../model/training/training.model';
 import { CartService } from '../../services/cart/cart.service';
 import { TrainingSearchService } from '../../services/search-bar/training-search.service';
+import {FlashService} from '../../services/flash/flash.service';
+import {SearchBar} from '../search-bar/search-bar';
 
 type SortKey = 'id' | 'name' | 'description' | 'price';
 type SortDir = 'asc' | 'desc';
-type Flash = { type: 'success' | 'danger' | 'info' | 'warning'; text: string };
+
 
 @Component({
   selector: 'app-admin-trainings',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, SearchBar],
   templateUrl: './admin-trainings.html',
   styleUrl: './admin-trainings.css',
 })
 export class AdminTrainings implements OnInit, OnDestroy {
 
-  // Message flash (succès/erreur/info) affiché en haut de page
-  flash: Flash | null = null;
+
 
   // Liste complète des formations (source de vérité côté composant)
   listTrainings: Training[] = [];
@@ -49,7 +50,8 @@ export class AdminTrainings implements OnInit, OnDestroy {
     private readonly cartService: CartService,
     private readonly search: TrainingSearchService,
     private readonly apiService: ApiService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+    private readonly flash: FlashService
   ) {}
 
   ngOnInit(): void {
@@ -62,17 +64,7 @@ export class AdminTrainings implements OnInit, OnDestroy {
       this.applyFilters();
     });
 
-    // 3) Récupérer un flash éventuellement passé via navigation (history.state)
-    const flash = (history.state as any)?.flash as Flash | undefined;
-    if (flash?.text) {
-      this.flash = flash;
 
-      // Auto-masquage après 3 secondes
-      setTimeout(() => (this.flash = null), 3000);
-
-      // Nettoie le state pour éviter que le flash réapparaisse (back/forward)
-      history.replaceState({ ...history.state, flash: null }, '');
-    }
   }
 
   ngOnDestroy(): void {
@@ -80,10 +72,7 @@ export class AdminTrainings implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 
-  // Ferme le message flash via le bouton "close"
-  closeFlash(): void {
-    this.flash = null;
-  }
+
 
   // Charge les formations depuis l’API, puis applique filtres + tri
   getAllTrainings(): void {
@@ -176,7 +165,7 @@ export class AdminTrainings implements OnInit, OnDestroy {
   // Supprime une formation côté API, puis met à jour la liste locale pour refléter l'état
   protected removeTraining(id?: string): void {
     if (!id) {
-      this.flash = { type: 'danger', text: 'Impossible de supprimer : id manquant.' };
+      this.flash.danger('Impossible de supprimer : id manquant');
       return;
     }
 
@@ -184,12 +173,13 @@ export class AdminTrainings implements OnInit, OnDestroy {
       next: () => {
         // Mise à jour locale (optimiste) pour retirer la ligne immédiatement
         this.listTrainings = this.listTrainings.filter(t => t.id !== id);
+        this.flash.success('La formation a été supprimée.');
 
-        this.flash = { type: 'success', text: 'La formation a été supprimée.' };
         this.applyFilters();
       },
-      error: () => {
-        this.flash = { type: 'danger', text: 'Suppression échouée.' };
+      error: (err) => {
+        this.flash.danger(err?.message ?? 'Suppression échouée.');
+
       }
     });
   }

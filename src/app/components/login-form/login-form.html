@@ -8,5 +8,10 @@
     <label for="enteredPassword">Password</label>
     <input name="enteredPassword" type="password" class="form-control" id="enteredPassword" [(ngModel)]="enteredPassword">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="form-group mt-4">
+    <button type="submit" class="btn btn-primary">Se connecter</button>
+  </div>
+  <div class="form-group mt-4">
+    <button routerLink="/userForm" class="btn btn-secondary">Créer un compte</button>
+  </div>
 </form>
