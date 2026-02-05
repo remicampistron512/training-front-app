@@ -7,6 +7,7 @@ import { UserService } from '../../services/user/user.service';
 import { ApiService } from '../../services/api/api-service';
 import { HashService } from '../../services/hash.service';
 import {AuthService} from '../../services/auth/auth.service';
+import {FlashService} from '../../services/flash/flash.service';
 
 @Component({
   selector: 'app-user-form',
@@ -31,13 +32,15 @@ export class UserForm {
     passwordHash: ''
   };
 
+
   constructor(
     private userService: UserService,      // (si tu l'utilises pour de la logique locale)
     private router: Router,                // navigation après création
     private users: ApiService,             // appels API (création user)
     private hash: HashService,             // hash du mot de passe
     private cdr: ChangeDetectorRef,         // forçage éventuel de rafraîchissement de vue
-    private auth: AuthService               // permet de savoir si l'utilisateur est admin ou non'
+    private auth: AuthService,             // permet de savoir si l'utilisateur est admin ou non'
+    private flash: FlashService
   ) {}
 
   // Handler appelé par le bouton "Enregistrer"
@@ -57,8 +60,10 @@ export class UserForm {
         console.log('Created:', created);
         if(this.auth.isAdmin()) {
           // Redirection vers la liste des utilisateurs
+          this.flash.success('Utilisateur ajouté avec succès.');
           this.router.navigate(['/userList']);
         } else {
+          this.flash.success('Compte créé avec succès.')
           this.router.navigate(['/trainings']);
         }
 

@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { CartService } from '../../services/cart/cart.service';
 import { Training } from '../../model/training/training.model';
 import { AuthService } from '../../services/auth/auth.service';
+import {FlashService} from '../../services/flash/flash.service';
 
 @Component({
   selector: 'app-cart',
@@ -19,9 +20,11 @@ export class Cart {
   // Injection des services :
   // - CartService : gestion du panier (ajout/suppression/lecture)
   // - AuthService : savoir si l’utilisateur est connecté (pour afficher certaines actions)
+
   constructor(
     public cartService: CartService,
-    public authService: AuthService
+    public authService: AuthService,
+    private flash: FlashService
   ) {}
 
   // Indique au template si l’utilisateur est connecté
@@ -38,6 +41,7 @@ export class Cart {
 
   // Retire une formation du panier (logique réelle gérée par le service)
   removeFromCart(t: Training): void {
+    this.flash.success('La formation a été supprimée.');
     this.cartService.removeTraining(t);
   }
 }

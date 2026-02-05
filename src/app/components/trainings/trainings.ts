@@ -7,6 +7,7 @@ import { CartService } from '../../services/cart/cart.service';
 import { TrainingSearchService } from '../../services/search-bar/training-search.service';
 import { ApiService } from '../../services/api/api-service';
 import {SearchBar} from '../search-bar/search-bar';
+import {FlashService} from '../../services/flash/flash.service';
 
 type SortKey = 'id' | 'name' | 'description' | 'price';
 type SortDir = 'asc' | 'desc';
@@ -46,11 +47,13 @@ export class Trainings implements OnInit, OnDestroy {
   // Abonnement au flux de recherche (à libérer)
   private sub?: Subscription;
 
+
   constructor(
     private cartService: CartService,
     private search: TrainingSearchService,
     private apiService: ApiService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private flash: FlashService
   ) {}
 
   ngOnInit(): void {
@@ -101,6 +104,7 @@ export class Trainings implements OnInit, OnDestroy {
 
   // Ajoute une formation au panier (logique portée par CartService)
   onAddToCart(training: Training): void {
+    this.flash.success('Formation ajoutée au panier.');
     this.cartService.addTraining(training);
   }
 

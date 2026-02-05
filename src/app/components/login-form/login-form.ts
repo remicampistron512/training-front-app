@@ -4,6 +4,7 @@ import {Router, RouterLink} from '@angular/router';
 
 import { ApiService } from '../../services/api/api-service';
 import { HashService } from '../../services/hash.service';
+import {FlashService} from '../../services/flash/flash.service';
 
 @Component({
   selector: 'app-login-form',
@@ -26,10 +27,12 @@ export class LoginForm {
   // Message d’erreur affichable côté UI
   error: string | null = null;
 
+
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private hashService: HashService
+    private hashService: HashService,
+    private flash: FlashService
   ) {}
 
   // Cherche l'utilisateur par email/login et vérifie le mot de passe via le hash
@@ -38,6 +41,7 @@ export class LoginForm {
       next: async (user) => {
         // L’API peut renvoyer null/[] si non trouvé
         if (!user || user.length === 0) {
+          this.flash.danger('Utilisateur introuvable.');
           console.log('auth not ok (user not found)');
           this.error = 'Utilisateur introuvable';
           return;
@@ -60,6 +64,7 @@ export class LoginForm {
           localStorage.setItem('user', JSON.stringify(user));
 
           // Redirection après connexion
+          this.flash.success('Authentification réussie.');
           this.router.navigateByUrl('/trainings');
         } else {
           console.log('auth not ok (bad password)');

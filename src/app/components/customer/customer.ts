@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CustomerService } from '../../services/customer/customer.service';
 import { Customer } from '../../model/customer/customer.model';
 import {CartService} from '../../services/cart/cart.service';
+import {FlashService} from '../../services/flash/flash.service';
 
 type StoredUser = { id: string; email: string; login?: string };
 
@@ -27,11 +28,13 @@ export class CustomerComponent implements OnInit {
   // Modèle lié au formulaire (pré-rempli si un client existe déjà pour cet utilisateur)
   customer: Customer = this.createEmptyCustomer(null);
 
+
   constructor(
     private readonly customerService: CustomerService,
     protected router: Router,
     private cdr: ChangeDetectorRef,
-    private cartService: CartService
+    private cartService: CartService,
+    private flash: FlashService
   ) {}
 
   ngOnInit(): void {
@@ -115,18 +118,17 @@ export class CustomerComponent implements OnInit {
         this.cartService.clear();
         // Client déjà existant : pas besoin de le recréer
         if (existing) {
-          this.router.navigateByUrl('/trainings', {
-            state: { flash: { type: 'success', text: 'Votre commande a bien été enregistrée.' } },
-          });
+          this.flash.success('Votre commande a bien été enregistrée.');
+          this.router.navigateByUrl('/trainings');
           return;
         }
 
         // Sinon : création du client puis navigation
         this.customerService.addCustomer(this.customer).subscribe({
           next: () => {
-            this.router.navigateByUrl('/trainings', {
-              state: { flash: { type: 'success', text: 'Votre commande a bien été enregistrée.' } },
-            });
+            this.cartService.clear();
+            this.flash.success('Votre commande a bien été enregistrée.');
+            this.router.navigateByUrl('/trainings');
           },
           error: (err) => console.error('Add failed:', err),
         });

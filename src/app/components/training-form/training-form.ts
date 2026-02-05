@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService } from '../../services/api/api-service';
 import { Training } from '../../model/training/training.model';
+import {FlashService} from '../../services/flash/flash.service';
 
 @Component({
   selector: 'app-training-form',
@@ -32,11 +33,13 @@ export class TrainingFormComponent implements OnInit {
   saving = false;
   errorMessage = '';
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private flash: FlashService
   ) {}
 
   ngOnInit(): void {
@@ -125,12 +128,11 @@ export class TrainingFormComponent implements OnInit {
           this.saving = false;
 
           // Retour à la liste admin avec flash message
-          this.router.navigateByUrl('/admin-trainings', {
-            state: { flash: { type: 'success', text: 'Formation mise à jour avec succès.' } }
-          });
+          this.flash.success('Formation mise à jour avec succès.');
+          this.router.navigateByUrl('/admin-trainings');
         },
         error: () => {
-          this.errorMessage = 'Erreur lors de la mise à jour.';
+          this.flash.danger('Erreur lors de la mis à jour.');
           this.saving = false;
         },
       });
@@ -140,11 +142,9 @@ export class TrainingFormComponent implements OnInit {
       this.apiService.addTraining(payload).subscribe({
         next: () => {
           this.saving = false;
-
+          this.flash.success('Formation créée avec succès.');
           // Retour à la liste admin avec flash message
-          this.router.navigateByUrl('/admin-trainings', {
-            state: { flash: { type: 'success', text: 'Formation créée avec succès.' } }
-          });
+          this.router.navigateByUrl('/admin-trainings');
         },
         error: () => {
           this.errorMessage = 'Erreur lors de la création.';
