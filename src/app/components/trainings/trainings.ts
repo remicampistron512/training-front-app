@@ -1,11 +1,11 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { Training } from '../../model/training/training.model';
 import { CartService } from '../../services/cart/cart.service';
 import { TrainingSearchService } from '../../services/search-bar/training-search.service';
-import {ApiService} from '../../services/api/api-service';
+import { ApiService } from '../../services/api/api-service';
 
 type SortKey = 'id' | 'name' | 'description' | 'price';
 type SortDir = 'asc' | 'desc';
@@ -14,73 +14,86 @@ type Flash = { type: 'success' | 'danger' | 'info' | 'warning'; text: string };
 @Component({
   selector: 'app-trainings',
   standalone: true,
+  // Formulaire template-driven (ngModel) pour filtres / quantités
   imports: [FormsModule],
   templateUrl: './trainings.html',
   styleUrl: './trainings.css',
 })
 export class Trainings implements OnInit, OnDestroy {
-  listTrainings: { id: string; name: string; description: string; price: number; stock: number,quantity:number }[] = [];
-  filteredTrainings: {id: string; name: string; description: string; price: number; stock: number,quantity:number }[] = [];
 
+  // Liste complète (source de vérité côté composant)
+  listTrainings: { id: string; name: string; description: string; price: number; stock: number; quantity: number }[] = [];
+
+  // Liste affichée après filtres + tri
+  filteredTrainings: { id: string; name: string; description: string; price: number; stock: number; quantity: number }[] = [];
+
+  // Terme de recherche (vient du service partagé)
   searchTerm = '';
 
-  maxPrice: number | null = null; // null = no max filter
+  // Filtre prix maximum (null = pas de filtre)
+  maxPrice: number | null = null;
 
+  // Paramètres de tri (colonne + direction)
   sortKey: SortKey = 'id';
   sortDir: SortDir = 'asc';
 
+  // Erreur API éventuelle
   error: string | null = null;
+
+  // Message flash reçu via navigation state
+  flash: Flash | null = null;
+
+  // Abonnement au flux de recherche (à libérer)
   private sub?: Subscription;
+
   constructor(
     private cartService: CartService,
     private search: TrainingSearchService,
     private apiService: ApiService,
     private cdr: ChangeDetectorRef
-  ) {
+  ) {}
 
+  ngOnInit(): void {
+    // 1) Charger les données depuis l'API
+    this.getAllTrainings();
 
+    // 2) Réagir aux changements de terme de recherche
+    this.sub = this.search.term$.subscribe(term => {
+      this.searchTerm = term ?? '';
+      this.applyFilters();
+    });
+
+    // 3) Récupérer un flash éventuellement passé via navigation (history.state)
+    const state = history.state as { flash?: Flash };
+    this.flash = state?.flash ?? null;
   }
-  flash: Flash | null = null;
+
+  ngOnDestroy(): void {
+    // Nettoyage RxJS
+    this.sub?.unsubscribe();
+  }
+
+  // Ferme le flash depuis le template
   closeFlash(): void {
     this.flash = null;
   }
 
-  ngOnInit(): void {
-
-    // 1) Load data
-    this.getAllTrainings();
-
-    // 2) React to search term changes
-    this.sub = this.search.term$.subscribe(term => {
-      this.searchTerm = term ?? '';
-      this.applyFilters();
-    });
-
-    // Read flash from navigation state (works after router navigation)
-    const state = history.state as { flash?: Flash };
-    this.flash = state?.flash ?? null;
-
-    this.getAllTrainings();
-    this.sub = this.search.term$.subscribe(term => {
-      this.searchTerm = term ?? '';
-      this.applyFilters();
-    });
-
-  }
-
-  ngOnDestroy(): void {
-    this.sub?.unsubscribe();
-  }
+  // Récupère les formations depuis l'API, normalise quelques champs, puis filtre/tri
   getAllTrainings(): void {
     this.apiService.getTrainings().subscribe({
       next: (data) => {
+        // Normalisation de types (id en string + prix en number)
         this.listTrainings = (data ?? []).map(t => ({
           ...t,
           id: String(t.id),
           price: Number(t.price),
         }));
+
+        // Applique filtres + tri
         this.applyFilters();
-        this.cdr.detectChanges(); // ✅ force view update
+
+        // Forçage éventuel du rafraîchissement (selon stratégie de détection)
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.error = err?.message ?? 'Erreur API';
@@ -90,14 +103,14 @@ export class Trainings implements OnInit, OnDestroy {
       }
     });
   }
+
+  // Ajoute une formation au panier (logique portée par CartService)
   onAddToCart(training: Training): void {
     this.cartService.addTraining(training);
   }
 
-
-
+  // Met à jour le filtre "prix max" en gérant null/valeurs invalides
   setMaxPrice(value: unknown): void {
-    // ngModelChange from <input type="number"> can be number | null | '' (string)
     if (value === null || value === undefined || value === '') {
       this.maxPrice = null;
     } else {
@@ -108,7 +121,7 @@ export class Trainings implements OnInit, OnDestroy {
     this.applyFilters();
   }
 
-
+  // Filtre selon texte + prix max, puis applique le tri
   private applyFilters(): void {
     const query = (this.searchTerm ?? '').trim().toLowerCase();
     const max = this.maxPrice;
@@ -129,6 +142,7 @@ export class Trainings implements OnInit, OnDestroy {
     this.applySort();
   }
 
+  // Change la colonne de tri ; si on reclique sur la même colonne, inverse asc/desc
   setSort(key: SortKey): void {
     if (this.sortKey === key) {
       this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';
@@ -139,24 +153,23 @@ export class Trainings implements OnInit, OnDestroy {
     this.applySort();
   }
 
+  // Applique le tri à la liste filtrée
   private applySort(): void {
     const dir = this.sortDir === 'asc' ? 1 : -1;
     const key = this.sortKey;
 
     this.filteredTrainings = [...this.filteredTrainings].sort((a, b) => {
-      // numeric subtraction ONLY for numeric fields
+      // Tri numérique pour le prix
       if (key === 'price') {
         return (a.price - b.price) * dir;
       }
 
-      // everything else (including id) as string compare
-      return String((a as any)[key]).localeCompare(String((b as any)[key]), undefined, {
-        sensitivity: 'base',
-      }) * dir;
+      // Tri alphabétique pour le reste
+      return (
+        String((a as any)[key]).localeCompare(String((b as any)[key]), undefined, {
+          sensitivity: 'base',
+        }) * dir
+      );
     });
   }
-
-
-
-
 }

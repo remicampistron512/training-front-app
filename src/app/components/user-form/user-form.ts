@@ -1,21 +1,23 @@
-import {ChangeDetectorRef,Component} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {User} from '../../model/user/user.model';
-import {UserService} from '../../services/user/user.service';
-import {Router} from '@angular/router';
-import {ApiService} from '../../services/api/api-service';
-import {HashService} from '../../services/hash.service';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { User } from '../../model/user/user.model';
+import { UserService } from '../../services/user/user.service';
+import { ApiService } from '../../services/api/api-service';
+import { HashService } from '../../services/hash.service';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [
-    FormsModule
-  ],
+  // Formulaire template-driven (ngModel)
+  imports: [FormsModule],
   templateUrl: './user-form.html',
   styleUrl: './user-form.css',
 })
 export class UserForm {
+
+  // Modèle lié au formulaire (valeurs par défaut)
   user: User = {
     id: new Date().getTime().toString(),
     name: '',
@@ -27,26 +29,37 @@ export class UserForm {
     role: '',
     passwordHash: ''
   };
-  constructor(private userService: UserService, private router: Router,private users: ApiService,private hash:HashService,private cdr: ChangeDetectorRef ) { }
 
-  protected onSaveUser() {
+  constructor(
+    private userService: UserService,      // (si tu l'utilises pour de la logique locale)
+    private router: Router,                // navigation après création
+    private users: ApiService,             // appels API (création user)
+    private hash: HashService,             // hash du mot de passe
+    private cdr: ChangeDetectorRef         // forçage éventuel de rafraîchissement de vue
+  ) {}
 
+  // Handler appelé par le bouton "Enregistrer"
+  protected onSaveUser(): void {
     this.push();
-
-
   }
-  async push() {
-      this.user.passwordHash = await this.hash.hashPassword(this.user.password);
 
-      this.users.addUser(this.user).subscribe({
+  // Prépare les données (hash du mot de passe) puis envoie la création à l'API
+  async push(): Promise<void> {
+    // Ne jamais envoyer le mot de passe en clair : on calcule le hash côté front (démo)
+    this.user.passwordHash = await this.hash.hashPassword(this.user.password);
+
+    // Appel API : création utilisateur
+    this.users.addUser(this.user).subscribe({
       next: (created) => {
         console.log('Created:', created);
-        this.router.navigate(['/userList']); // navigate AFTER save/log
-        this.cdr.detectChanges();
 
+        // Redirection vers la liste des utilisateurs
+        this.router.navigate(['/userList']);
+
+        // Forçage éventuel de l'update (souvent inutile si change detection standard)
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error:', err),
     });
-
   }
 }
