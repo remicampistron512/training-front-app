@@ -36,10 +36,10 @@ export class AdminTrainings implements OnInit, OnDestroy{
   private sub?: Subscription;
 
   constructor(
-    private cartService: CartService,
-    private search: TrainingSearchService,
-    private apiService: ApiService,
-    private cdr: ChangeDetectorRef
+    private readonly cartService: CartService,
+    private readonly search: TrainingSearchService,
+    private readonly apiService: ApiService,
+    private readonly cdr: ChangeDetectorRef
   ) {
 
 

@@ -30,7 +30,6 @@ export class Trainings implements OnInit, OnDestroy {
 
   error: string | null = null;
   private sub?: Subscription;
-
   constructor(
     private cartService: CartService,
     private search: TrainingSearchService,

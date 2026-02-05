@@ -1,6 +1,6 @@
 <div>
   <div class="d-flex gap-2 mb-3 align-items-center">
-    <label class="form-label mb-0">Max price:</label>
+    <label class="form-label mb-0">Prix maximum:</label>
 
     <input
       type="number"
@@ -10,14 +10,14 @@
       name="maxPrice"
       [ngModel]="maxPrice"
       (ngModelChange)="setMaxPrice($event)"
-      placeholder="e.g. 600"
+      placeholder="ex. 600"
     />
 
     <button class="btn btn-outline-secondary" type="button" (click)="setMaxPrice(null)">
-      Clear
+      Réinitialiser
     </button>
   </div>
-  @if (filteredTrainings?.length) {
+  @if (filteredTrainings.length) {
     <ng-container>
 
 
@@ -26,9 +26,9 @@
         <thead>
         <tr>
           <th role="button" (click)="setSort('id')">ID</th>
-          <th role="button" (click)="setSort('name')">Name</th>
+          <th role="button" (click)="setSort('name')">Nom</th>
           <th role="button" (click)="setSort('description')">Description</th>
-          <th role="button" (click)="setSort('price')">Price</th>
+          <th role="button" (click)="setSort('price')">Prix</th>
         </tr>
         </thead>
 
@@ -56,10 +56,10 @@
       </table>
     </ng-container>
   } @else {
-    @if ((searchTerm?.trim()?.length ?? 0) > 0 || maxPrice !== null) {
-      <p>No trainings match your filters.</p>
+    @if ((searchTerm.trim().length) > 0 || maxPrice !== null) {
+      <p>Aucune formations ne correspond au filtres.</p>
     } @else {
-      <p>No trainings available.</p>
+      <p>Aucune formations disponibles.</p>
     }
   }
 </div>
