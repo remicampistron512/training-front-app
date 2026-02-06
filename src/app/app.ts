@@ -1,17 +1,17 @@
 import { Component, signal,OnInit } from '@angular/core';
 import {Router, NavigationEnd, RouterOutlet, RouterLink, RouterLinkActive} from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { SearchBar } from './components/search-bar/search-bar';
 import {AuthService} from './services/auth/auth.service';
 import {ThemeService} from './services/theme.service';
 import {CartService} from './services/cart/cart.service';
 import {FlashComponent} from './components/flash/flash.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, SearchBar, RouterLinkActive, FlashComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, FlashComponent,MatSlideToggleModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

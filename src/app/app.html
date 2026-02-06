@@ -54,16 +54,19 @@
       <!-- Right nav -->
       <ul class="navbar-nav ms-auto">
         <li class="">
+
+
         <button type="button" class="align-bottom mt-2 mx-2 btn btn-link nav-link p-0" (click)="theme.toggle()" aria-label="Toggle dark mode">
           @if (theme.isDark) {
             <i class="bi bi-sun"></i>
           } @else {
             <i class="bi bi-moon"></i>
           }
+
         </button>
+          <mat-slide-toggle>Toggle me!</mat-slide-toggle>
         </li>
         <li class="nav-item">
-
           <button type="button" routerLink="/cart" class="btn btn-primary position-relative">
             <i class="bi bi-cart"></i>
             Panier
