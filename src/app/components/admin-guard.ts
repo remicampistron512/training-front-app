@@ -11,6 +11,6 @@ export const adminGuard: CanActivateFn = (route, state) => {
     return true
   }
   else {
-    return router.createUrlTree(['/home'])
+    return router.createUrlTree(['/trainings'])
   }
 };

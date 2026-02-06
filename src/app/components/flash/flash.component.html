@@ -1,6 +1,6 @@
 <!-- flash.component.html -->
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080; width: 420px; max-width: 100%;">
-  <ng-container *ngFor="let f of (flashes$ | async); trackBy: trackById">
+  @for (f of (flashes$ | async); track getFlashId($index, f)) {
     <div
       class="alert alert-{{ f.type }} mb-2"
       [class.alert-dismissible]="f.dismissible"
@@ -8,14 +8,14 @@
     >
       {{ f.text }}
 
-      <button
-        *ngIf="f.dismissible"
-        type="button"
-        class="btn-close"
-        aria-label="Close"
-        (click)="close(f.id)"
-      ></button>
+      @if (f.dismissible) {
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="close(f.id)"
+        ></button>
+      }
     </div>
-  </ng-container>
+  }
 </div>
-

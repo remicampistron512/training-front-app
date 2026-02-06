@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Training} from '../../model/training/training.model';
 import {environment} from '../../Environment'
 import {User} from '../../model/user/user.model';
-
+/* Contient tout le crud de l'application, à dispatcher dans des services plus spécifiques */
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   constructor(private http:HttpClient){}
