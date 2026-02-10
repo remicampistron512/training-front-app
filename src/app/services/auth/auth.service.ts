@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
+  //
   isLoggedIn():boolean {
+    //converts the value to a boolean without negating (because it negates twice).
       return !!localStorage.getItem('user');
   }
   isAdmin(): boolean {

@@ -14,14 +14,11 @@ import {FlashService} from '../../services/flash/flash.service';
 })
 export class LoginForm {
 
-  // Événement optionnel émis vers un parent (si tu en as besoin)
-  @Output() add = new EventEmitter<{ login: string; password: string }>();
-
   // Champs du formulaire (template-driven)
   enteredLogin = '';
   enteredPassword = '';
 
-  // Utilisateur chargé depuis l’API (idéalement typé au lieu de any)
+  // Utilisateur chargé depuis l’API
   user: any;
 
   // Message d’erreur affichable côté UI
@@ -59,8 +56,7 @@ export class LoginForm {
         if (ok) {
           console.log('auth ok');
 
-          // Stockage de l'utilisateur connecté (attention : éviter d’y stocker le hash)
-          // IMPORTANT: ici, tu stockes "user" (le tableau). Souvent on stocke plutôt user[0].
+          // Stockage de l'utilisateur connecté
           localStorage.setItem('user', JSON.stringify(user));
 
           // Redirection après connexion
@@ -83,11 +79,5 @@ export class LoginForm {
   onSubmit(): void {
     this.error = null;
     this.getUserByEmail();
-  }
-
-  // Méthode héritée d'une ancienne approche : comparaison en clair
-  // À éviter / supprimer (la vérification via hashService suffit)
-  isValidPassword(): boolean {
-    return this.user?.password === this.enteredPassword;
   }
 }

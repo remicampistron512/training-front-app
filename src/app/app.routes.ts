@@ -33,7 +33,7 @@ export const routes: Routes = [
   { path:'userForm', component: UserForm},
   { path:'logout', component: Logout},
   { path: 'training-form', component: TrainingFormComponent},
-  { path: 'admin-trainings',component: AdminTrainings},
+  { path: 'admin-trainings',component: AdminTrainings,canActivate :[adminGuard]},
   { path: 'trainings/new', component: TrainingFormComponent },
   { path: 'trainings/:id/edit', component: TrainingFormComponent },
   { path: 'finalizeOrder', component: FinalizeOrder},

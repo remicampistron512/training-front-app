@@ -90,7 +90,7 @@ export class Trainings implements OnInit, OnDestroy {
         // Applique filtres + tri
         this.applyFilters();
 
-        // Forçage éventuel du rafraîchissement (selon stratégie de détection)
+        // Forçage du rafraîchissement
         this.cdr.detectChanges();
       },
       error: (err) => {

@@ -36,14 +36,6 @@
   ],
   "trainings": [
     {
-      "name": "Java Spring Boot Masterclass",
-      "description": "REST APIs, JPA/Hibernate, validation, security basics, testing, layered architecture.",
-      "price": 720,
-      "stock": 12,
-      "quantity": 1,
-      "id": "2"
-    },
-    {
       "name": "Angular Frontend Development",
       "description": "Components, services, routing, RxJS, forms, HTTP client, best practices.",
       "price": 590,
@@ -101,7 +93,7 @@
     },
     {
       "name": "CI/CD with GitHub Actions",
-      "description": "Workflows, builds, tests, Docker integration, deployment pipeline examples.",
+      "description": "Workflows and, builds, tests, Docker integration, deployment pipeline examples.",
       "price": 630,
       "stock": 11,
       "quantity": 1,
@@ -114,6 +106,14 @@
       "stock": 2,
       "quantity": 1,
       "id": "20"
+    },
+    {
+      "id": "1770732644762",
+      "name": "erer",
+      "description": "erzerzerzer",
+      "price": 52,
+      "stock": 5,
+      "quantity": 0
     }
   ],
   "customers": [

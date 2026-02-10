@@ -17,8 +17,6 @@ export class ApiService {
     return this.http.get<Training>(environment.host+"/trainings/"+id);
   }
 
-
-
   public updateTraining(id: string, training: Training) {
     return this.http.put<Training>(`${environment.host}/trainings/${id}`, training);
   }
